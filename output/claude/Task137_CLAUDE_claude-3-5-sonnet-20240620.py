@@ -4,10 +4,7 @@ import sqlite3
 def create_table():
     conn = sqlite3.connect('products.db')
     cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE IF NOT EXISTS products
-                      (id INTEGER PRIMARY KEY,
-                       name TEXT,
-                       price REAL)''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS products\n                      (id INTEGER PRIMARY KEY,\n                       name TEXT,\n                       price REAL)''')
     conn.commit()
     conn.close()
 
@@ -21,7 +18,7 @@ def add_product(name, price):
 def get_product(product_id):
     conn = sqlite3.connect('products.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM products WHERE id = ?", (product_id,))
+    cursor.execute("SELECT * FROM products WHERE id=?", (product_id,))
     product = cursor.fetchone()
     conn.close()
     return product
@@ -30,8 +27,7 @@ def main():
     create_table()
 
     while True:
-        print("\
-1. Add product")
+        print("\\n1. Add product")
         print("2. Get product details")
         print("3. Exit")
         choice = input("Enter your choice: ")

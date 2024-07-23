@@ -1,20 +1,10 @@
 Syntax check successful: ./output/llama3\Task0_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task100_PERPLEXITY_llama-3-sonar-large-32k-chat.py
-Syntax check failed for ./output/llama3\Task101_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task101_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 4
-    file.write("#!/bin/bash
-               ^
-SyntaxError: unterminated string literal (detected at line 4)
-
+Syntax check successful: ./output/llama3\Task101_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task102_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task103_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task104_PERPLEXITY_llama-3-sonar-large-32k-chat.py
-Syntax check failed for ./output/llama3\Task105_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task105_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 10
-    request = b"GET / HTTP/1.1\r
-              ^
-SyntaxError: unterminated string literal (detected at line 10)
-
+Syntax check successful: ./output/llama3\Task105_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task106_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task107_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task108_PERPLEXITY_llama-3-sonar-large-32k-chat.py
@@ -42,21 +32,11 @@ Syntax check successful: ./output/llama3\Task127_PERPLEXITY_llama-3-sonar-large-
 Syntax check successful: ./output/llama3\Task128_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task129_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task12_PERPLEXITY_llama-3-sonar-large-32k-chat.py
-Syntax check failed <false alarm> for ./output/llama3\Task130_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task130_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 1
-    code here:
-         ^^^^
-SyntaxError: invalid syntax
-
+Syntax check successful: ./output/llama3\Task130_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task131_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task132_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task133_PERPLEXITY_llama-3-sonar-large-32k-chat.py
-Syntax check failed for ./output/llama3\Task134_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task134_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 1
-    code here:
-         ^^^^
-SyntaxError: invalid syntax
-
+Syntax check successful: ./output/llama3\Task134_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task135_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task136_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task137_PERPLEXITY_llama-3-sonar-large-32k-chat.py
@@ -78,32 +58,12 @@ Syntax check successful: ./output/llama3\Task150_PERPLEXITY_llama-3-sonar-large-
 Syntax check successful: ./output/llama3\Task151_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task152_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task153_PERPLEXITY_llama-3-sonar-large-32k-chat.py
-Syntax check failed for ./output/llama3\Task154_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task154_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 1
-    code here:
-         ^^^^
-SyntaxError: invalid syntax
-
+Syntax check successful: ./output/llama3\Task154_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task155_PERPLEXITY_llama-3-sonar-large-32k-chat.py
-Syntax check failed for ./output/llama3\Task156_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task156_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 34
-    print("
-          ^
-SyntaxError: unterminated string literal (detected at line 34)
-
-Syntax check failed for ./output/llama3\Task157_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task157_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 1
-    code here:
-         ^^^^
-SyntaxError: invalid syntax
-
+Syntax check successful: ./output/llama3\Task156_PERPLEXITY_llama-3-sonar-large-32k-chat.py
+Syntax check successful: ./output/llama3\Task157_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task158_PERPLEXITY_llama-3-sonar-large-32k-chat.py
-Syntax check failed for ./output/llama3\Task159_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task159_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 1
-    code here:
-         ^^^^
-SyntaxError: invalid syntax
-
+Syntax check successful: ./output/llama3\Task159_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task15_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task160_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task161_PERPLEXITY_llama-3-sonar-large-32k-chat.py
@@ -212,18 +172,8 @@ Syntax check successful: ./output/llama3\Task73_PERPLEXITY_llama-3-sonar-large-3
 Syntax check successful: ./output/llama3\Task74_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task75_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task76_PERPLEXITY_llama-3-sonar-large-32k-chat.py
-Syntax check failed for ./output/llama3\Task77_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task77_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 11
-    cmd = "USER " + username + "\r
-                               ^
-SyntaxError: unterminated string literal (detected at line 11)
-
-Syntax check failed for ./output/llama3\Task78_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task78_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 7
-    privateKeyOpenSSH = "-----BEGIN OPENSSH PRIVATE KEY-----
-                        ^
-SyntaxError: unterminated string literal (detected at line 7)
-
+Syntax check successful: ./output/llama3\Task77_PERPLEXITY_llama-3-sonar-large-32k-chat.py
+Syntax check successful: ./output/llama3\Task78_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task79_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task7_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task80_PERPLEXITY_llama-3-sonar-large-32k-chat.py
@@ -233,12 +183,7 @@ Syntax check successful: ./output/llama3\Task83_PERPLEXITY_llama-3-sonar-large-3
 Syntax check successful: ./output/llama3\Task84_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task85_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task86_PERPLEXITY_llama-3-sonar-large-32k-chat.py
-Syntax check failed for ./output/llama3\Task87_PERPLEXITY_llama-3-sonar-large-32k-chat.py:
-  File "./output/llama3\Task87_PERPLEXITY_llama-3-sonar-large-32k-chat.py", line 23
-    file.write("Execution time: {:.2f} milliseconds
-               ^
-SyntaxError: unterminated string literal (detected at line 23)
-
+Syntax check successful: ./output/llama3\Task87_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task88_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task89_PERPLEXITY_llama-3-sonar-large-32k-chat.py
 Syntax check successful: ./output/llama3\Task8_PERPLEXITY_llama-3-sonar-large-32k-chat.py

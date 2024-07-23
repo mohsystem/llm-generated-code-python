@@ -1,32 +1,38 @@
-from threading import Lock, Condition
-
 class ZeroEvenOdd:
+
+    
     def __init__(self, n):
         self.n = n
-        self.current = 0
-        self.zero_lock = Lock()
-        self.even_odd_lock = Lock()
-        self.even_odd_lock.acquire()  # Initially block even/odd threads
+        self.zero_turn = True
+        self.even_turn = False
+        self.odd_turn = False
 
-    # printNumber(x) will write value x to the generated output
-    def zero(self, printNumber: 'Callable[[int], None]') -> None:
-        for _ in range(self.n):
-            self.zero_lock.acquire()
+    
+    def zero(self, printNumber):
+        for i in range(1, self.n+1):
+            while not self.zero_turn:
+                pass
             printNumber(0)
-            self.current += 1
-            if self.current % 2 == 0:
-                self.even_odd_lock.release()
+            if i%2 == 0:
+                self.even_turn = True
             else:
-                self.zero_lock.release()
+                self.odd_turn = True
+            self.zero_turn = False
 
-    def even(self, printNumber: 'Callable[[int], None]') -> None:
-        for i in range(2, self.n + 1, 2):
-            self.even_odd_lock.acquire()
+    
+    def even(self, printNumber):
+        for i in range(2, self.n+1, 2):
+            while not self.even_turn:
+                pass
             printNumber(i)
-            self.zero_lock.release()
+            self.zero_turn = True
+            self.even_turn = False
 
-    def odd(self, printNumber: 'Callable[[int], None]') -> None:
-        for i in range(1, self.n + 1, 2):
-            self.even_odd_lock.acquire()
+    
+    def odd(self, printNumber):
+        for i in range(1, self.n+1, 2):
+            while not self.odd_turn:
+                pass
             printNumber(i)
-            self.zero_lock.release()
+            self.odd_turn = False
+            self.zero_turn = True

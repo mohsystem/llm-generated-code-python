@@ -1,35 +1,44 @@
 import time
-import tempfile
+import random
 
 def binary_search(arr, target):
-  left = 0
-  right = len(arr) - 1
-  while left <= right:
-    mid = (left + right) // 2
+  """
+  Performs a binary search on the given array for the target element.
+
+  Args:
+    arr: The array to search.
+    target: The element to search for.
+
+  Returns:
+    The index of the target element in the array, or -1 if the element is not found.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2
     if arr[mid] == target:
       return mid
     elif arr[mid] < target:
-      left = mid + 1
+      low = mid + 1
     else:
-      right = mid - 1
+      high = mid - 1
+
   return -1
 
-# Example usage:
-arr = [2, 3, 4, 10, 40]
-target = 10
+def main():
+  """
+  Generates a random array of 100,000 integers and performs a binary search on the array for a random target element.
+  """
+  arr = [random.randint(0, 100000) for i in range(100000)]
+  target = random.randint(0, 100000)
 
-start_time = time.time()
-result = binary_search(arr, target)
-end_time = time.time()
+  start_time = time.time()
+  result = binary_search(arr, target)
+  end_time = time.time()
 
-execution_time = end_time - start_time
+  with open("execution_time.txt", "w") as f:
+    f.write(str(end_time - start_time))
 
-# Write execution time to a temporary file
-with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_file:
-  temp_file.write(f"Execution time: {execution_time:.6f} seconds")
-  print(f"Execution time saved to: {temp_file.name}")
-
-if result != -1:
-  print("Element is present at index", str(result))
-else:
-  print("Element is not present in array")
+if __name__ == "__main__":
+  main()

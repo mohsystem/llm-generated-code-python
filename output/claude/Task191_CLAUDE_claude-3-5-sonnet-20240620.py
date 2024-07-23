@@ -15,3 +15,10 @@ class Solution:
                     max_length = max(max_length, i - stack[-1])
         
         return max_length
+
+# Test the solution
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.longestValidParentheses("(()"))  # Output: 2
+    print(solution.longestValidParentheses(")()())"))  # Output: 4
+    print(solution.longestValidParentheses(""))  # Output: 0

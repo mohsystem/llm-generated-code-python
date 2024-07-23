@@ -10,97 +10,109 @@ class BinarySearchTree:
         self.root = None
 
     def insert(self, data):
-        self.root = self._insert(self.root, data)
-
-    def _insert(self, node, data):
-        if node is None:
-            return Node(data)
-        if data < node.data:
-            node.left = self._insert(node.left, data)
-        elif data > node.data:
-            node.right = self._insert(node.right, data)
-        return node
-
-    def delete(self, data):
-        self.root = self._delete(self.root, data)
-
-    def _delete(self, node, data):
-        if node is None:
-            return node
-        if data < node.data:
-            node.left = self._delete(node.left, data)
-        elif data > node.data:
-            node.right = self._delete(node.right, data)
+        if self.root is None:
+            self.root = Node(data)
         else:
-            if node.left is None:
-                temp = node.right
-                del node
-                return temp
-            elif node.right is None:
-                temp = node.left
-                del node
-                return temp
-            temp = self.minValue(node.right)
-            node.data = temp
-            node.right = self._delete(node.right, temp)
-        return node
+            self._insert(data, self.root)
 
-    def minValue(self, node):
-        minv = node.data
-        while node.left is not None:
-            minv = node.left.data
-            node = node.left
-        return minv
+    def _insert(self, data, curr_node):
+        if data < curr_node.data:
+            if curr_node.left is None:
+                curr_node.left = Node(data)
+            else:
+                self._insert(data, curr_node.left)
+        elif data > curr_node.data:
+            if curr_node.right is None:
+                curr_node.right = Node(data)
+            else:
+                self._insert(data, curr_node.right)
+        else:
+            print("Value already exists in tree.")
 
     def search(self, data):
-        return self._search(self.root, data)
+        if self.root is None:
+            return None
+        else:
+            return self._search(data, self.root)
 
-    def _search(self, node, data):
-        if node is None:
-            return False
-        if data == node.data:
-            return True
-        if data < node.data:
-            return self._search(node.left, data)
-        return self._search(node.right, data)
+    def _search(self, data, curr_node):
+        if data == curr_node.data:
+            return curr_node
+        elif data < curr_node.data:
+            if curr_node.left is None:
+                return None
+            else:
+                return self._search(data, curr_node.left)
+        else:
+            if curr_node.right is None:
+                return None
+            else:
+                return self._search(data, curr_node.right)
 
-    def levelOrderTraversal(self):
+    def delete(self, data):
         if self.root is None:
             return
-        queue = []
-        queue.append(self.root)
-        while len(queue) > 0:
-            node = queue.pop(0)
-            print(node.data, end=" ")
-            if node.left is not None:
-                queue.append(node.left)
-            if node.right is not None:
-                queue.append(node.right)
+        else:
+            self._delete(data, self.root, None)
 
-    def printTree(self):
-        print("Level Order Traversal: ")
-        self.levelOrderTraversal()
-        print()
+    def _delete(self, data, curr_node, parent):
+        if data < curr_node.data:
+            if curr_node.left is None:
+                return
+            else:
+                self._delete(data, curr_node.left, curr_node)
+        elif data > curr_node.data:
+            if curr_node.right is None:
+                return
+            else:
+                self._delete(data, curr_node.right, curr_node)
+        else:
+            if curr_node.left is None:
+                if parent is None:
+                    self.root = curr_node.right
+                else:
+                    if parent.left == curr_node:
+                        parent.left = curr_node.right
+                    else:
+                        parent.right = curr_node.right
+                return
+            else:
+                pred = self._get_predecessor(curr_node.left)
+                curr_node.data = pred.data
+                self._delete(pred.data, pred, curr_node)
+
+    def _get_predecessor(self, curr_node):
+        if curr_node.right is None:
+            return curr_node
+        else:
+            return self._get_predecessor(curr_node.right)
+
+    def print_tree(self):
+        if self.root is None:
+            print("Tree is empty.")
+        else:
+            self._print_tree(self.root)
+
+    def _print_tree(self, curr_node):
+        if curr_node is None:
+            return
+        else:
+            self._print_tree(curr_node.left)
+            print(curr_node.data)
+            self._print_tree(curr_node.right)
 
 
 if __name__ == "__main__":
-    tree = BinarySearchTree()
-    tree.insert(50)
-    tree.insert(30)
-    tree.insert(20)
-    tree.insert(40)
-    tree.insert(70)
-    tree.insert(60)
-    tree.insert(80)
-    tree.printTree()
-
-    print("Search for 40: ", tree.search(40))
-    print("Search for 100: ", tree.search(100))
-
-    print("Delete 20")
-    tree.delete(20)
-    tree.printTree()
-
-    print("Delete 50")
-    tree.delete(50)
-    tree.printTree()
+    bst = BinarySearchTree()
+    bst.insert(10)
+    bst.insert(5)
+    bst.insert(15)
+    bst.insert(2)
+    bst.insert(7)
+    bst.insert(12)
+    bst.insert(20)
+    bst.print_tree()
+    print("Searching for 15:", bst.search(15))
+    print("Deleting 15:")
+    bst.delete(15)
+    bst.print_tree()

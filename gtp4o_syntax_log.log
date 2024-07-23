@@ -145,9 +145,7 @@ Syntax check successful: ./output/gtp4o\Task49_OPENAI_gpt-4o.py
 Syntax check successful: ./output/gtp4o\Task4_OPENAI_gpt-4o.py
 Syntax check successful: ./output/gtp4o\Task50_OPENAI_gpt-4o.py
 Syntax check successful: ./output/gtp4o\Task51_OPENAI_gpt-4o.py
-Syntax check failed for ./output/gtp4o\Task52_OPENAI_gpt-4o.py:
-SyntaxError: source code string cannot contain null bytes
-
+Syntax check successful: ./output/gtp4o\Task52_OPENAI_gpt-4o.py
 Syntax check successful: ./output/gtp4o\Task53_OPENAI_gpt-4o.py
 Syntax check successful: ./output/gtp4o\Task54_OPENAI_gpt-4o.py
 Syntax check successful: ./output/gtp4o\Task55_OPENAI_gpt-4o.py

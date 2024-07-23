@@ -31,7 +31,4 @@ graph = {
 
 start_node = 'A'
 shortest_paths = dijkstra(graph, start_node)
-
-print("Shortest paths from", start_node)
-for node, distance in shortest_paths.items():
-    print(f"To {node}: {distance}")
+print(shortest_paths)

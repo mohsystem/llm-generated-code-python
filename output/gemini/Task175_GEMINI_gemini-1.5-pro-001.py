@@ -7,7 +7,7 @@ class MountainArray:
 
     def length(self) -> int:
         return len(self.array)
-      
+
 class Solution:
     def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:
         n = mountain_arr.length()
@@ -19,18 +19,21 @@ class Solution:
             else:
                 right = mid
         peak = left
-        index = self.binary_search(mountain_arr, target, 0, peak, True)
-        if index != -1:
-            return index
-        return self.binary_search(mountain_arr, target, peak + 1, n - 1, False)
-
-    def binary_search(self, mountain_arr, target, left, right, ascending):
+        left, right = 0, peak
         while left <= right:
             mid = (left + right) // 2
-            mid_val = mountain_arr.get(mid)
-            if mid_val == target:
+            if mountain_arr.get(mid) == target:
                 return mid
-            elif (mid_val < target and ascending) or (mid_val > target and not ascending):
+            elif mountain_arr.get(mid) < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        left, right = peak, n - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if mountain_arr.get(mid) == target:
+                return mid
+            elif mountain_arr.get(mid) > target:
                 left = mid + 1
             else:
                 right = mid - 1

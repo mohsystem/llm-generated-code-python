@@ -1,20 +1,35 @@
 import socket
-import sys
 
-HOST = ''  # Standard loopback interface address (localhost)
-PORT = 8080        # Port to listen on (non-privileged ports are > 1023)
+# Create a socket object
+serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen()
-    print(f'Server listening on port {PORT}')
+# Get the local machine name
+host = socket.gethostname()
+
+# Reserve a port for your service
+port = 5000
+
+# Bind to the port
+serversocket.bind((host, port))
+
+# Queue up to 5 requests
+serversocket.listen(5)
+
+while True:
+    # Establish a connection with a client
+    clientsocket,addr = serversocket.accept()
+
+    print("Got a connection from %s" % str(addr))
+
     while True:
-        conn, addr = s.accept()
-        with conn:
-            print(f'Connected by {addr}')
-            while True:
-                data = conn.recv(1024).decode('utf-8')
-                if not data:
-                    break
-                print(f'Received: {data}')
-                conn.sendall(data.encode('utf-8'))
+        # Receive data from the client
+        data = clientsocket.recv(1024)
+
+        if not data:
+            break
+
+        # Echo back the data to the client
+        clientsocket.send(data)
+
+    # Close the connection with the client
+    clientsocket.close()

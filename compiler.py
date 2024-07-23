@@ -29,6 +29,6 @@ def check_syntax(source_dir, logfile):
                 print(log_message)
 
 if __name__ == "__main__":
-    source_directory = "./output/llama3"  # Replace with the path to your source directory
-    logfile = "llama3_syntax_log.log"
+    source_directory = "./output/gtp4o"  # Replace with the path to your source directory
+    logfile = "gtp4o_syntax_log.log"
     check_syntax(source_directory, logfile)

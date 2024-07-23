@@ -1,7 +1,7 @@
 
 import re
 
-def is_valid_password(password):
+def is_valid_admin_password(password):
     if len(password) < 12:
         return False
     if not re.search(r'[A-Z]', password):
@@ -10,13 +10,15 @@ def is_valid_password(password):
         return False
     if not re.search(r'\\d', password):
         return False
-    if not re.search(r'[!@#$%^&*()_+\-=\[\]{};:\'"\\|,.<>/?]', password):
+    if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+        return False
+    if 'admin' in password.lower():
         return False
     return True
 
-password = input("Enter password: ")
-
-if is_valid_password(password):
-    print("Password is valid.")
+# Test the function
+password = input("Enter the admin password: ")
+if is_valid_admin_password(password):
+    print("Password is valid")
 else:
-    print("Password is invalid.")
+    print("Password is invalid")

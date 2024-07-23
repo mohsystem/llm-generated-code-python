@@ -10,7 +10,7 @@ def reset_password(username):
     new_password = generate_password()
     print(f"Password for {username} has been reset.")
     print(f"New password: {new_password}")
-    # In a real system, you would hash and save this password
+    # In a real system, you would hash and save this password securely
     return new_password
 
 def main():
