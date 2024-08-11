@@ -18,12 +18,12 @@ def clean_class_name(file_name):
 # directory = "C:/sourceCode/PhD/code-llm-evaluation-dataset/dataset/output/GEMINI_gemini-1.5-pro-001"  # Update this path
 # directory = "C:/sourceCode/PhD/code-llm-evaluation-dataset/dataset/output/MISTRAL_codestral-latest"  # Update this path
 # directory = "C:/sourceCode/PhD/code-llm-evaluation-dataset/dataset/output/OPENAI_gpt-4o"  # Update this path
-directory = "C:/sourceCode/PhD/llm-generated-code-python/test/llama3"  # Update this path
+directory = "C:/sourceCode/PhD/llm-generated-code-python/output/llama3"  # Update this path
 
 # Process each Java file in the directory
 for file_name in os.listdir(directory):
     if file_name.endswith('.py'):
         file_path = os.path.join(directory, file_name)
         new_class_name = clean_class_name(file_name)
-        os.mkdir(os.path.join(directory, f"{new_class_name}"))
-        os.rename(os.path.join(directory, file_name), os.path.join(f"{directory}/{new_class_name}", f"{new_class_name}.py"))
+        # os.mkdir(os.path.join(directory, f"{new_class_name}"))
+        os.rename(os.path.join(directory, file_name), os.path.join(f"{directory}", f"{new_class_name}.py"))
