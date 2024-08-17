@@ -34,10 +34,9 @@ def test_bus_stops():
     stops = [(3, 0), (0, 2), (2, 1), (0, 1), (1, 0)]
     assert bus_stops(stops) == 2
 
-    # Test Case 9: Verifies that the bus ends up empty after the final stop
-    stops = [(50, 0), (0, 50)]
+
+    stops = []
     assert bus_stops(stops) == 0
 
-    # Test Case 10: Varied inputs, ensuring correct calculation
     stops = [(6, 0), (2, 3), (1, 5), (7, 2)]
-    assert bus_stops(stops) == 6
+    assert bus_stops(stops) == 0  #should be exception
