@@ -1,4 +1,4 @@
-import pytest
+# import pytest
 from output.codestral.Task1_MISTRAL_codestral_latest import bus_stops  # Adjust the import path as necessary
 
 def test_bus_stops():
@@ -40,3 +40,6 @@ def test_bus_stops():
 
     stops = [(6, 0), (2, 3), (1, 5), (7, 2)]
     assert bus_stops(stops) == 0  #should be exception
+
+
+test_bus_stops()

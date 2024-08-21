@@ -2,10 +2,10 @@ import mysql.connector
 
 def get_user_info(username):
     db = mysql.connector.connect(
-        host="localhost",
-        user="your_username",
-        password="your_password",
-        database="your_database"
+        host="192.168.1.233",
+        user="kali",
+        password="",
+        database="test_db"
     )
     cursor = db.cursor()
     query = "SELECT * FROM users WHERE username = %s"
@@ -20,3 +20,6 @@ if user_info:
     print("User found:", user_info)
 else:
     print("User not found")
+
+if __name__ == "__main__":
+    get_user_info("ahmad")

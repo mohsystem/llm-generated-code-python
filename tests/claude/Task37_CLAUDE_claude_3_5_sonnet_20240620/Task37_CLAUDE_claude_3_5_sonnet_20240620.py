@@ -4,10 +4,10 @@ import mysql.connector
 def get_user_info(username):
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="your_username",
-            password="your_password",
-            database="your_database"
+            host="192.168.1.233",
+            user="kali",
+            password="",
+            database="test_db"
         )
 
         cursor = connection.cursor()
@@ -29,5 +29,5 @@ def get_user_info(username):
             connection.close()
 
 if __name__ == "__main__":
-    username = input("Enter username: ")
+    username = input("Enter username: ") # user : ahmad
     get_user_info(username)
