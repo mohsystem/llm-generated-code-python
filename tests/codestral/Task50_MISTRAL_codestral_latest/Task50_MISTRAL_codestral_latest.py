@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = '/path/to/upload/folder'
+UPLOAD_FOLDER = './upload'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/upload', methods=['POST'])

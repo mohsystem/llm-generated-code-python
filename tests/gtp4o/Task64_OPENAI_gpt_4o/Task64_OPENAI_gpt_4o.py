@@ -14,3 +14,6 @@ try:
     print(json.dumps(data, indent=4))
 except json.JSONDecodeError:
     print("Failed to parse JSON from the response.")
+
+
+# https://auth.lambdatest.com/api/country-details

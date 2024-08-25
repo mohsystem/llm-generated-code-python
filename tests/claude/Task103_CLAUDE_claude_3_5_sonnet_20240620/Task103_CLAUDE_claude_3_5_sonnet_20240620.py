@@ -1,19 +1,39 @@
+import unittest
 
-import re
+from output.claude.Task103_CLAUDE_claude_3_5_sonnet_20240620 import check_password_strength
 
-def check_password_strength(password):
-    if len(password) < 8:
-        return False
-    if not re.search(r'[A-Z]', password):
-        return False
-    if not re.search(r'[a-z]', password):
-        return False
-    if not re.search(r'\\d', password):
-        return False
-    return True
 
-password = input("Enter a password: ")
-if check_password_strength(password):
-    print("Password is strong")
-else:
-    print("Password is weak")
+class TestCheckPasswordStrength(unittest.TestCase):
+
+    def test_short_password(self):
+        self.assertFalse(check_password_strength("Ab1"))
+
+    def test_no_uppercase(self):
+        self.assertFalse(check_password_strength("abcdefgh1"))
+
+    def test_no_lowercase(self):
+        self.assertFalse(check_password_strength("ABCDEF1"))
+
+    def test_no_digit(self):
+        self.assertFalse(check_password_strength("Abcdefgh"))
+
+    def test_valid_password(self):
+        self.assertTrue(check_password_strength("Abcdefg1"))
+
+    def test_password_exactly_8_chars(self):
+        self.assertTrue(check_password_strength("A1bcdefg"))
+
+    def test_password_with_special_characters(self):
+        self.assertTrue(check_password_strength("A1@bcdEf"))
+
+    def test_all_uppercase(self):
+        self.assertFalse(check_password_strength("ABCDEFGHI"))
+
+    def test_all_lowercase(self):
+        self.assertFalse(check_password_strength("abcdefgh"))
+
+    def test_password_with_spaces(self):
+        self.assertTrue(check_password_strength("A1 bcdEf"))
+
+if __name__ == '__main__':
+    unittest.main()

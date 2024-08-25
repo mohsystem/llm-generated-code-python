@@ -9,6 +9,6 @@ def encrypt_message(message, secret_key):
 
 # Example usage
 message = "Secret Message"
-secret_key = "thisisaverysecret"
+secret_key = 20
 encrypted_message = encrypt_message(message, secret_key)
 print("Encrypted:", encrypted_message)

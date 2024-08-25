@@ -1,26 +1,48 @@
-def is_valid_password(password):
-    # Admin password requirements:
-    # - At least 8 characters long
-    # - Contains at least one uppercase letter
-    # - Contains at least one lowercase letter
-    # - Contains at least one digit
-    # - Contains at least one special character
+import unittest
 
-    if len(password) < 8:
-        return False
-    if not any(char.isupper() for char in password):
-        return False
-    if not any(char.islower() for char in password):
-        return False
-    if not any(char.isdigit() for char in password):
-        return False
-    if not any(char in '!@#$%^&*()-_=+[]{}|;:,.<>?' for char in password):
-        return False
-    return True
+from output.codestral.Task73_MISTRAL_codestral_latest import is_valid_password as is_valid_password
 
-# Test the function
-password = input("Enter admin password: ")
-if is_valid_password(password):
-    print("Password is valid.")
-else:
-    print("Password is invalid.")
+class TestIsValidPassword(unittest.TestCase):
+
+    def test_valid_password(self):
+        password = "Valid1Password$2024"
+        self.assertTrue(is_valid_password(password))
+
+    def test_too_short_password(self):
+        password = "Short1$"
+        self.assertFalse(is_valid_password(password))
+
+    def test_missing_uppercase(self):
+        password = "validpassword1$"
+        self.assertFalse(is_valid_password(password))
+
+    def test_missing_lowercase(self):
+        password = "VALIDPASSWORD1$"
+        self.assertFalse(is_valid_password(password))
+
+    def test_missing_digit(self):
+        password = "ValidPassword$"
+        self.assertFalse(is_valid_password(password))
+
+    def test_missing_special_char(self):
+        password = "ValidPassword1"
+        self.assertFalse(is_valid_password(password))
+
+    def test_contains_special_chars(self):
+        password = "Valid1Password@#"
+        self.assertTrue(is_valid_password(password))
+
+    def test_valid_password_with_longer_length(self):
+        password = "VeryLongValidPassword1$2024"
+        self.assertTrue(is_valid_password(password))
+
+    def test_short_password_no_special_char(self):
+        password = "ShortPass1"
+        self.assertFalse(is_valid_password(password))
+
+    def test_valid_password_with_mixed_chars(self):
+        password = "Mix3d#Chars"
+        self.assertTrue(is_valid_password(password))
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,18 +1,36 @@
-import hashlib
+from output.gtp4o.Task42_OPENAI_gpt_4o import *
 
-class UserAuth:
-    def __init__(self):
-        self.users = {}
+import unittest
+class TestUserAuth(unittest.TestCase):
 
-    def add_user(self, username, password):
-        hashed = hashlib.sha256(password.encode()).hexdigest()
-        self.users[username] = hashed
+    def setUp(self):
+        self.auth = UserAuth()
+        self.auth.add_user("user", "pass")
 
-    def authenticate(self, username, password):
-        hashed = hashlib.sha256(password.encode()).hexdigest()
-        return self.users.get(username) == hashed
+    def test_add_user(self):
+        self.auth.add_user("newuser", "newpass")
+        self.assertTrue(self.auth.authenticate("newuser", "newpass"))
 
-auth = UserAuth()
-auth.add_user("user", "pass")
-print(auth.authenticate("user", "pass"))
-print(auth.authenticate("user", "wrongpass"))
+    def test_authenticate_success(self):
+        self.assertTrue(self.auth.authenticate("user", "pass"))
+
+    def test_authenticate_failure(self):
+        self.assertFalse(self.auth.authenticate("user", "wrongpass"))
+
+    def test_authenticate_non_existent_user(self):
+        self.assertFalse(self.auth.authenticate("nonexistent", "pass"))
+
+    def test_authenticate_with_empty_password(self):
+        self.auth.add_user("emptyuser", "")
+        self.assertTrue(self.auth.authenticate("emptyuser", ""))
+
+    def test_authenticate_with_empty_username(self):
+        self.auth.add_user("", "pass")
+        self.assertFalse(self.auth.authenticate("", "pass"))
+
+    def test_add_user_with_existing_username(self):
+        self.auth.add_user("user", "newpass")
+        self.assertTrue(self.auth.authenticate("user", "newpass"))
+
+if __name__ == "__main__":
+    unittest.main()

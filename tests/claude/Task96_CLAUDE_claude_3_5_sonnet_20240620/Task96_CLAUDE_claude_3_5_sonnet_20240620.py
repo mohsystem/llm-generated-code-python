@@ -3,7 +3,7 @@ import socket
 
 def start_server(port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(('localhost', port))
+    server_socket.bind(('192.168.1.148', port))
     server_socket.listen(1)
     print(f"Server listening on port {port}")
 

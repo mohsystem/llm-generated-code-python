@@ -1,8 +1,8 @@
 import socket
 import threading
 
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
+HOST = '192.168.1.148'  # Standard loopback interface address (localhost)
+PORT = 5555        # Port to listen on (non-privileged ports are > 1023)
 
 clients = []
 usernames = {}

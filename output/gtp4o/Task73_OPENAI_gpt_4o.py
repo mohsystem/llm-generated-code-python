@@ -4,6 +4,3 @@ def check_password(password):
         return "Password is valid"
     else:
         return "Password is invalid"
-
-password_input = input("Enter the admin password: ")
-print(check_password(password_input))

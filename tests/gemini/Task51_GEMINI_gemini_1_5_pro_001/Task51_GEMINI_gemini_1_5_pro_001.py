@@ -1,19 +1,38 @@
-def encrypt(text, key):
-    result = ''
-    for i in range(len(text)):
-        char = text[i]
-        if char.isalpha():
-            start = ord('a') if char.islower() else ord('A')
-            shifted_char = chr((ord(char) - start + key) % 26 + start)
-        elif char.isdigit():
-            shifted_char = str((int(char) + key) % 10)
-        else:
-            shifted_char = char
-        result += shifted_char
-    return result
+import unittest
+from output.gemini.Task51_GEMINI_gemini_1_5_pro_001 import encrypt as encrypt
 
-# Example usage (modify input and key as needed)
-input_string = "Hello, world 123!"
-encryption_key = 3
-encrypted_string = encrypt(input_string, encryption_key)
-print("Encrypted:", encrypted_string)
+
+class TestEncryptFunction(unittest.TestCase):
+
+    def test_basic_encryption(self):
+        self.assertEqual(encrypt("abc", 3), "def")
+
+    def test_encryption_with_uppercase(self):
+        self.assertEqual(encrypt("ABC", 3), "DEF")
+
+    def test_encryption_with_mixed_case(self):
+        self.assertEqual(encrypt("aBc", 2), "cDe")
+
+    def test_encryption_with_non_alpha_characters(self):
+        self.assertEqual(encrypt("a b-c", 5), "f g-h")
+
+    def test_encryption_with_large_shift_value(self):
+        self.assertEqual(encrypt("xyz", 30), "bcd")
+
+    def test_encryption_with_negative_shift_value(self):
+        self.assertEqual(encrypt("def", -3), "abc")
+
+    def test_encryption_with_shift_value_zero(self):
+        self.assertEqual(encrypt("hello", 0), "hello")
+
+    def test_encryption_with_shift_value_26(self):
+        self.assertEqual(encrypt("xyz", 26), "xyz")
+
+    def test_encryption_empty_string(self):
+        self.assertEqual(encrypt("", 5), "")
+
+    def test_encryption_non_alpha_characters_only(self):
+        self.assertEqual(encrypt("1234!@#$", 4), "5678!@#$")
+
+if __name__ == "__main__":
+    unittest.main()

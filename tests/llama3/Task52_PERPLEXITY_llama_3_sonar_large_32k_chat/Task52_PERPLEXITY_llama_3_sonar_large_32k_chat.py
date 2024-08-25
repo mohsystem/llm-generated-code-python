@@ -38,7 +38,7 @@ def decrypt_file(file_path, shift):
         file.write(decrypted_text)
 
 # Example usage
-file_path = 'example.txt'
+file_path = './example.txt'
 shift = 3
 encrypt_file(file_path, shift)
 decrypt_file(file_path, shift)

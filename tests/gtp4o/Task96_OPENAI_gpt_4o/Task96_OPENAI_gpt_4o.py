@@ -1,7 +1,7 @@
 import socket
 
 def python_server():
-    host, port = "127.0.0.1", 65432
+    host, port = "192.168.1.148", 6454
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
         s.listen()
@@ -14,3 +14,6 @@ def python_server():
                 if not data:
                     break
                 conn.sendall(data)
+                # print(data)
+
+python_server()

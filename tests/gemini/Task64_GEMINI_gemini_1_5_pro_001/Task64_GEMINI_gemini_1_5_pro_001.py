@@ -29,3 +29,8 @@ if __name__ == "__main__":
 
   if json_data:
     print(json_data)
+
+
+# https://auth.lambdatest.com/api/country-details
+
+

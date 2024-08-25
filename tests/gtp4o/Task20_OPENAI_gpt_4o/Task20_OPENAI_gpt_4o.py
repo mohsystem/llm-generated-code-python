@@ -38,7 +38,7 @@ class TestDigPow(unittest.TestCase):
 
     def test_another_example(self):
         # Test with another example where n = 135 and p = 2
-        self.assertEqual(dig_pow(135, 2), 1)
+        self.assertEqual(dig_pow(135, 2), -1) #todo : fix in java
 
     def test_all_digits_same(self):
         # Test where all digits are the same n = 111 and p = 1

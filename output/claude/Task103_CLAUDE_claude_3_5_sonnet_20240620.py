@@ -11,9 +11,3 @@ def check_password_strength(password):
     if not re.search(r'\\d', password):
         return False
     return True
-
-password = input("Enter a password: ")
-if check_password_strength(password):
-    print("Password is strong")
-else:
-    print("Password is weak")

@@ -27,7 +27,7 @@ def remove(client_socket):
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server.bind(('0.0.0.0', 5555))
+server.bind(('192.168.1.148', 5555))
 server.listen(10)
 clients = []
 

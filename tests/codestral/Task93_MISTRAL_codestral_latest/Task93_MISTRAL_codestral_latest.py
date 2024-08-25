@@ -7,5 +7,5 @@ def read_and_sort_file(file_path):
         return records
 
 # Usage
-sorted_records = read_and_sort_file('path_to_your_file.txt')
+sorted_records = read_and_sort_file('testFile.txt')
 print(sorted_records)

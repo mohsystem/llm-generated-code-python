@@ -17,8 +17,11 @@ def encrypt_message(message, key):
     return encrypted
 
 # Example usage
-message = "Hello, World!"
+message = "Hello"
 key = 42
 encrypted = encrypt_message(message, key)
 print(f"Original: {message}")
 print(f"Encrypted: {encrypted}")
+
+
+# the code dont use key for encryption

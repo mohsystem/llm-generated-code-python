@@ -7,7 +7,7 @@ xml_file = sys.argv[2]
 tree = etree.parse(xml_file)
 root = tree.getroot()
 
-query = "/tag[@id='{}']".format(xpath_value)
+query = "/library/book[@id='1']/author"
 result = root.xpath(query)
 
 print(result)

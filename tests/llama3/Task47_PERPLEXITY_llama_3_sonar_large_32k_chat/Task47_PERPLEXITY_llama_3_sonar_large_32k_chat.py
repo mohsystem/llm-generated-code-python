@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import sqlite3
 
 # Send a GET request
-response = requests.get("https://www.example.com")
+response = requests.get("https://www.google.com")
 
 # If the GET request is successful, the status code will be 200
 if response.status_code == 200:
@@ -14,7 +14,7 @@ if response.status_code == 200:
     soup = BeautifulSoup(page_content, 'html.parser')
 
     # Find the data you want to scrape
-    data = soup.find_all('div', {'class': 'data'})
+    data = soup.find_all()
 
     # Connect to the SQLite database
     conn = sqlite3.connect('database.db')

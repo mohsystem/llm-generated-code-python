@@ -17,3 +17,4 @@ def login(username, password, otp):
 
 # Example usage:
 print(login('user', 'password', generate_otp()))
+

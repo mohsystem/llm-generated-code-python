@@ -1,7 +1,7 @@
 import sys
 
 # Define the fixed-size buffer
-BUFFER_SIZE = 1024
+BUFFER_SIZE = 10
 
 # Function to handle user input
 def get_user_input():

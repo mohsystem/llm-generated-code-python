@@ -1,65 +1,72 @@
-
+import unittest
 import time
 import uuid
+from output.claude.Task53_CLAUDE_claude_3_5_sonnet_20240620 import *
 
-class Session:
-    def __init__(self, user_id):
-        self.session_id = str(uuid.uuid4())
-        self.user_id = user_id
-        self.created_at = time.time()
-        self.last_accessed = time.time()
+# Assuming the Session and SessionManager classes are already defined above
 
-class SessionManager:
-    def __init__(self, session_timeout=1800):  # 30 minutes default timeout
-        self.sessions = {}
-        self.session_timeout = session_timeout
+class TestSessionManager(unittest.TestCase):
+    def setUp(self):
+        self.session_manager = SessionManager()
+        self.user_id = "user123"
+        self.session_id = self.session_manager.create_session(self.user_id)
 
-    def create_session(self, user_id):
-        session = Session(user_id)
-        self.sessions[session.session_id] = session
-        return session.session_id
+    def test_create_session(self):
+        self.assertTrue(self.session_id)
+        self.assertIn(self.session_id, self.session_manager.sessions)
+        session = self.session_manager.sessions[self.session_id]
+        self.assertEqual(session.user_id, self.user_id)
+        self.assertIsInstance(session.session_id, str)
 
-    def get_session(self, session_id):
-        session = self.sessions.get(session_id)
-        if session:
-            if time.time() - session.last_accessed > self.session_timeout:
-                self.destroy_session(session_id)
-                return None
-            session.last_accessed = time.time()
-        return session
+    def test_get_session(self):
+        session = self.session_manager.get_session(self.session_id)
+        self.assertIsNotNone(session)
+        self.assertEqual(session.user_id, self.user_id)
 
-    def destroy_session(self, session_id):
-        if session_id in self.sessions:
-            del self.sessions[session_id]
+    def test_get_invalid_session(self):
+        invalid_session_id = str(uuid.uuid4())
+        session = self.session_manager.get_session(invalid_session_id)
+        self.assertIsNone(session)
 
-    def cleanup_expired_sessions(self):
-        current_time = time.time()
-        expired_sessions = [
-            session_id for session_id, session in self.sessions.items()
-            if current_time - session.last_accessed > self.session_timeout
-        ]
-        for session_id in expired_sessions:
-            self.destroy_session(session_id)
+    def test_session_timeout(self):
+        self.session_manager.session_timeout = 1  # Set a short timeout for testing
+        time.sleep(2)  # Wait for the session to expire
+        session = self.session_manager.get_session(self.session_id)
+        self.assertIsNone(session)
 
-# Example usage
+    def test_destroy_session(self):
+        self.session_manager.destroy_session(self.session_id)
+        self.assertNotIn(self.session_id, self.session_manager.sessions)
+
+    def test_cleanup_expired_sessions(self):
+        self.session_manager.session_timeout = 1  # Set a short timeout for testing
+        session_id2 = self.session_manager.create_session("user456")
+        time.sleep(2)  # Wait for the first session to expire
+        self.session_manager.cleanup_expired_sessions()
+        self.assertNotIn(self.session_id, self.session_manager.sessions)
+        self.assertIn(session_id2, self.session_manager.sessions)
+
+    def test_cleanup_no_expired_sessions(self):
+        session_id2 = self.session_manager.create_session("user789")
+        self.session_manager.cleanup_expired_sessions()
+        self.assertIn(self.session_id, self.session_manager.sessions)
+        self.assertIn(session_id2, self.session_manager.sessions)
+
+    def test_update_last_accessed(self):
+        time.sleep(1)
+        session = self.session_manager.get_session(self.session_id)
+        self.assertIsNotNone(session)
+        self.assertGreater(session.last_accessed, session.created_at)
+
+    def test_create_multiple_sessions(self):
+        session_id2 = self.session_manager.create_session("user456")
+        self.assertIn(session_id2, self.session_manager.sessions)
+        self.assertNotEqual(self.session_id, session_id2)
+
+    def test_destroy_non_existent_session(self):
+        non_existent_session_id = str(uuid.uuid4())
+        self.session_manager.destroy_session(non_existent_session_id)
+        self.assertNotIn(non_existent_session_id, self.session_manager.sessions)
+
 if __name__ == "__main__":
-    session_manager = SessionManager()
-
-    # Create a new session
-    user_id = "user123"
-    session_id = session_manager.create_session(user_id)
-    print(f"New session created: {session_id}")
-
-    # Get session
-    session = session_manager.get_session(session_id)
-    if session:
-        print(f"Session found for user: {session.user_id}")
-    else:
-        print("Session not found")
-
-    # Cleanup expired sessions
-    session_manager.cleanup_expired_sessions()
-
-    # Destroy session
-    session_manager.destroy_session(session_id)
-    print("Session destroyed")
+    unittest.main()

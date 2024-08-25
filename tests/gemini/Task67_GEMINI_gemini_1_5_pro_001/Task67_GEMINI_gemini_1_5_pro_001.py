@@ -26,6 +26,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     customerusername = sys.argv[1]
+    print(customerusername)
     customer_info = get_customer_info(customerusername)
 
     if customer_info:

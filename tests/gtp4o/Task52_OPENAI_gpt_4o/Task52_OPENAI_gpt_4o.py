@@ -38,4 +38,4 @@ def decrypt_file(file_name):
 # Usage
 file_name = 'test.txt'
 encrypt_file(file_name)
-decrypt_file(file_name)
+decrypt_file(file_name) # the code have error on decode file

@@ -11,7 +11,7 @@ def update_password(username, new_password):
     try:
         conn = sqlite3.connect('users.db')
         cursor = conn.cursor()
-        cursor.execute("UPDATE user SET password = ? WHERE username = ?", (hashed_password, username))
+        cursor.execute("UPDATE users SET password = ? WHERE username = ?", (hashed_password, username))
         conn.commit()
         print("Password updated successfully!")
     except sqlite3.Error as e:

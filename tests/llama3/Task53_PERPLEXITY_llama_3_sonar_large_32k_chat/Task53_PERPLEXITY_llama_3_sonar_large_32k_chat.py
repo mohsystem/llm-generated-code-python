@@ -22,6 +22,13 @@ session_manager = SessionManager()
 
 # create a session
 session_id = session_manager.create_session("user1")
+session_id = session_manager.create_session("user1")
+session_id = session_manager.create_session("user1")
+session_id = session_manager.create_session("user1")
+# Session ID: session_id_4
+# User ID: user1
+# Session invalidated
+
 print("Session ID:", session_id)
 
 # get user id from session id

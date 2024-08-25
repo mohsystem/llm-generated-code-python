@@ -22,6 +22,6 @@ def read_file_and_sort(file_path):
     return sorted_data
 
 if __name__ == '__main__':
-    sorted_records = read_file_and_sort('input.txt')
+    sorted_records = read_file_and_sort('testFile.txt')
     for key, value in sorted_records:
         print(f"{key}={value}")

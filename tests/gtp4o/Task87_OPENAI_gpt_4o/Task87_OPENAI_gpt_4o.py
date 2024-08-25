@@ -23,4 +23,5 @@ end_time = time.time()
 execution_time = end_time - start_time
 
 with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+    print(temp_file.name)
     temp_file.write(f"Execution time: {execution_time}".encode())

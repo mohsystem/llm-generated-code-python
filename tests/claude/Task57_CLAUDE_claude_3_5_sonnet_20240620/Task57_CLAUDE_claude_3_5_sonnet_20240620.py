@@ -5,6 +5,39 @@ def factorial(n):
     else:
         return n * factorial(n - 1)
 
-num = int(input("Enter a number: "))
-result = factorial(num)
-print(f"The factorial of {num} is {result}")
+
+import unittest
+
+class TestFactorial(unittest.TestCase):
+
+    def test_factorial_zero(self):
+        self.assertEqual(factorial(0), 1)
+
+    def test_factorial_one(self):
+        self.assertEqual(factorial(1), 1)
+
+    def test_factorial_two(self):
+        self.assertEqual(factorial(2), 2)
+
+    def test_factorial_three(self):
+        self.assertEqual(factorial(3), 6)
+
+    def test_factorial_four(self):
+        self.assertEqual(factorial(4), 24)
+
+    def test_factorial_five(self):
+        self.assertEqual(factorial(5), 120)
+
+    def test_factorial_six(self):
+        self.assertEqual(factorial(6), 720)
+
+    def test_factorial_large_number(self):
+        self.assertEqual(factorial(10), 3628800)
+
+    def test_factorial_negative_number(self):
+        with self.assertRaises(RecursionError):  # Optional, to simulate behavior
+            factorial(-1)
+
+    def test_factorial_string_input(self):
+        with self.assertRaises(TypeError):
+            factorial("5")

@@ -3,7 +3,7 @@ import sys
 
 def process_input(user_input):
     # Process the input (example: print it back)
-    print(f"Processed input: {user_input}")
+    return (f"Processed input: {user_input}")
 
 def main():
     # Get input from user with a maximum length

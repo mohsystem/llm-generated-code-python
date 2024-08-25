@@ -9,7 +9,7 @@ def scrape_data(url):
     data = []
 
     # This example assumes you're scraping list items (li) from the webpage
-    for item in soup.find_all('li'):
+    for item in soup.find_all():
         data.append(item.text)
 
     return data
@@ -27,7 +27,7 @@ def store_data(db_name, data):
     conn.close()
 
 # Example
-url = 'https://example.com'
+url = 'https://www.google.com'
 db_name = 'scraped_data.db'
 data = scrape_data(url)
 store_data(db_name, data)

@@ -1,7 +1,7 @@
 
 import sys
 
-BUFFER_SIZE = 100
+BUFFER_SIZE = 20
 
 def main():
     buffer = ""

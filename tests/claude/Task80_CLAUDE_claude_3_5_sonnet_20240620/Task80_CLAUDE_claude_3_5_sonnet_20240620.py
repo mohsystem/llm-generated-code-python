@@ -13,3 +13,4 @@ def create_ssl_ipv6_socket(host, port):
 # host = "example.com"
 # port = 443
 # ssl_socket = create_ssl_ipv6_socket(host, port)
+create_ssl_ipv6_socket("192.168.1.233",443)

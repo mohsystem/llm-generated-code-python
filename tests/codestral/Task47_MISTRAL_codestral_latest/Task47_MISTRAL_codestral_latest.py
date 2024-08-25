@@ -12,9 +12,10 @@ c.execute('''CREATE TABLE IF NOT EXISTS data
              (title TEXT, link TEXT)''')
 
 # Scrape data
-url = 'http://example.com'
+url = 'https://www.google.com'
 response = requests.get(url)
 soup = BeautifulSoup(response.text, 'html.parser')
+
 
 for item in soup.find_all('div', class_='item'):
     title = item.find('h2').text

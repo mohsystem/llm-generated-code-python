@@ -15,7 +15,7 @@ def binary_search(arr, target):
     return -1
 
 if __name__ == "__main__":
-    arr = sorted([1, 3, 5, 7, 9, 11, 13, 15, 17, 19])
+    arr = sorted([1, 3, 5, 7, 9, 11, 15, 17, 19])
     target = 13
 
     start_time = time.time()

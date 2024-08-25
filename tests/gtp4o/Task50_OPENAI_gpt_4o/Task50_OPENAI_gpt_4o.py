@@ -13,8 +13,12 @@ def upload_file():
     file = request.files['file']
     if file.filename == '':
         return jsonify({'message': 'No selected file'})
+    print(os.path.join(UPLOAD_FOLDER, file.filename))
     file.save(os.path.join(UPLOAD_FOLDER, file.filename))
     return jsonify({'message': 'File successfully uploaded'})
 
 if __name__ == '__main__':
     app.run(port=5000)
+
+
+# file not save its need to fix save path

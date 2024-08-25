@@ -11,3 +11,5 @@ def generate_random_string(length):
   """
   letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
   return ''.join(random.choice(letters) for _ in range(length))
+
+print (generate_random_string(20))

@@ -9,11 +9,3 @@ def is_password_valid(password):
         return False
     return True
 
-# Get the password input
-password = input("Enter the password: ")
-
-# Check if the password is valid
-if is_password_valid(password):
-    print("Valid password")
-else:
-    print("Invalid password")

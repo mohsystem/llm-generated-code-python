@@ -18,9 +18,9 @@ def is_valid_password(password):
         return False
     return True
 
-# Test the function
-password = input("Enter admin password: ")
-if is_valid_password(password):
-    print("Password is valid.")
-else:
-    print("Password is invalid.")
+# # Test the function
+# password = input("Enter admin password: ")
+# if is_valid_password(password):
+#     print("Password is valid.")
+# else:
+#     print("Password is invalid.")

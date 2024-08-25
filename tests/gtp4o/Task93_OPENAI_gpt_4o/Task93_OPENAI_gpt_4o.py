@@ -5,6 +5,7 @@ def read_and_sort(filename):
     with open(filename, 'r') as file:
         for line in file:
             key, value = line.strip().split()
+            # print(key, value)
             records.append((key, value))
     sorted_records = sorted(records, key=lambda x: x[0])
     for record in sorted_records:

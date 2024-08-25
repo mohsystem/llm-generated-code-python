@@ -13,4 +13,4 @@ def create_ssl_connection(host, port):
             print(f"Certificate: {cert}")
 
 if __name__ == "__main__":
-    create_ssl_connection("www.example.com", 443)
+    create_ssl_connection("www.google.com", 80)

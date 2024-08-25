@@ -5,3 +5,5 @@ def match_lines(file_path):
         for line in file:
             if re.match(r'^\d.*\.$', line):
                 print(line.strip())
+
+match_lines("test.txt")

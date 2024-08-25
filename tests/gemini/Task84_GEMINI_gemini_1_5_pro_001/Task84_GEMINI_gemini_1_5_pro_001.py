@@ -11,3 +11,5 @@ def generate_session_id(length=16):
     A string representing the session ID.
   """
   return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+
+print(generate_session_id())

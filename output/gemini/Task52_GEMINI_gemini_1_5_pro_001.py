@@ -40,7 +40,7 @@ if __name__ == "__main__":
     generate_key()
     key = load_key()
 
-    filename = "test.txt"
+    filename = "./test.txt"
     encrypt_file(filename, key)
     print(f"Encrypted file: {filename}")
 

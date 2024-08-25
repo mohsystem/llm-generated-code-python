@@ -1,5 +1,5 @@
 
-f = open("input.txt", "r")
+f = open("testFile.txt", "r")
 records = [line.strip().split("=") for line in f]
 records.sort()
 for record in records:

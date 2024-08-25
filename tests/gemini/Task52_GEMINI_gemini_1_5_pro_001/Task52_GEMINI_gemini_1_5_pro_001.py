@@ -1,48 +1,54 @@
-from cryptography.fernet import Fernet
+import os
+import unittest
+from output.gemini.Task52_GEMINI_gemini_1_5_pro_001 import *
 
-def generate_key():
-    """
-    Generates a Fernet key and saves it to a file.
-    """
-    key = Fernet.generate_key()
-    with open("secret.key", "wb") as key_file:
-        key_file.write(key)
 
-def load_key():
-    """
-    Loads the Fernet key from a file.
-    """
-    return open("secret.key", "rb").read()
+class TestEncryptionFunctions(unittest.TestCase):
 
-def encrypt_file(filename, key):
-    """
-    Encrypts a file using the Fernet library.
-    """
-    f = Fernet(key)
-    with open(filename, "rb") as file:
-        original_data = file.read()
-    encrypted_data = f.encrypt(original_data)
-    with open(filename, "wb") as file:
-        file.write(encrypted_data)
+    @classmethod
+    def setUpClass(cls):
+        cls.key_file = "secret.key"
+        cls.test_file = "test.txt"
+        cls.original_content = b"This is a test file content."
 
-def decrypt_file(filename, key):
-    """
-    Decrypts a file using the Fernet library.
-    """
-    f = Fernet(key)
-    with open(filename, "rb") as file:
-        encrypted_data = file.read()
-    decrypted_data = f.decrypt(encrypted_data)
-    with open(filename, "wb") as file:
-        file.write(decrypted_data)
+        # Create a test file with original content
+        with open(cls.test_file, "wb") as f:
+            f.write(cls.original_content)
+
+    @classmethod
+    def tearDownClass(cls):
+        # Remove files after tests
+        if os.path.exists(cls.test_file):
+            os.remove(cls.test_file)
+        if os.path.exists(cls.key_file):
+            os.remove(cls.key_file)
+
+    def test_generate_key(self):
+        generate_key()
+        self.assertTrue(os.path.exists(self.key_file), "Key file should be created.")
+
+    def test_load_key(self):
+        generate_key()
+        key = load_key()
+        self.assertEqual(len(key), 44, "Key should be 44 bytes long.")
+
+    def test_encrypt_decrypt_file(self):
+        generate_key()
+        key = load_key()
+
+        # Encrypt the file
+        encrypt_file(self.test_file, key)
+        with open(self.test_file, "rb") as f:
+            encrypted_content = f.read()
+
+        self.assertNotEqual(encrypted_content, self.original_content, "File content should be encrypted.")
+
+        # Decrypt the file
+        decrypt_file(self.test_file, key)
+        with open(self.test_file, "rb") as f:
+            decrypted_content = f.read()
+
+        self.assertEqual(decrypted_content, self.original_content, "File content should be decrypted correctly.")
 
 if __name__ == "__main__":
-    generate_key()
-    key = load_key()
-
-    filename = "test.txt"
-    encrypt_file(filename, key)
-    print(f"Encrypted file: {filename}")
-
-    decrypt_file(filename, key)
-    print(f"Decrypted file: {filename}")
+    unittest.main()

@@ -4,7 +4,7 @@ import socket
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Get the local machine name
-host = socket.gethostname()
+host = '192.168.1.148'
 
 # Reserve a port for your service
 port = 5000
