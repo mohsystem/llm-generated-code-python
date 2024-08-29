@@ -2,8 +2,8 @@
 import requests
 
 def retrieve_file(filename):
-    server_url = "http://example.com/files/"  # Replace with actual server URL
-    file_url = server_url + filename
+    server_url = "http://192.168.1.233:8000/"
+    file_url = server_url + filename # testFile.txt
     
     try:
         response = requests.get(file_url)

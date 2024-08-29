@@ -14,6 +14,7 @@ if file_path:
             file_content = file.read()
             # ...
         messagebox.showinfo("Success", "File uploaded successfully!")
+
     except FileNotFoundError:
         messagebox.showerror("Error", f"File not found: {file_path}")
 else:

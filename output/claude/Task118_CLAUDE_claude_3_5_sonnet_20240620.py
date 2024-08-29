@@ -2,7 +2,7 @@
 import re
 
 def validate_ip(ip):
-    pattern = r'^(\\d{1,3}\\.){3}\\d{1,3}$'
+    pattern = r'^(\d{1,3}\.){3}\d{1,3}$'
     if not re.match(pattern, ip):
         return False
     octets = ip.split('.')
@@ -22,10 +22,6 @@ def process_ip(ip):
             class_type = 'D'
         elif 240 <= int(octets[0]) <= 255:
             class_type = 'E'
-        print(f"Valid IP address. Class: {class_type}")
+        return class_type
     else:
-        print("Invalid IP address")
-
-if __name__ == "__main__":
-    ip = input("Enter an IP address: ")
-    process_ip(ip)
+        return "Invalid IP address"

@@ -1,3 +1,4 @@
+import os
 import time
 import logging
 
@@ -21,5 +22,5 @@ def monitor_file_changes(file_path):
     log_event("Error", f"An error occurred while monitoring '{file_path}': {str(e)}")
 
 if __name__ == "__main__":
-  file_to_monitor = "/path/to/your/important_file.txt"  # Replace with the actual file path
+  file_to_monitor = "logs.log"  # Replace with the actual file path
   monitor_file_changes(file_to_monitor)

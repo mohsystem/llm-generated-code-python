@@ -6,9 +6,3 @@ def validate_input(user_input):
         return True
     else:
         return False
-
-user_input = input("Enter your input: ")
-if validate_input(user_input):
-    print("Input is valid")
-else:
-    print("Input is invalid")

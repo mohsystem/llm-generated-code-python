@@ -7,3 +7,6 @@ CORS(app)
 @app.route('/api')
 def api():
     return 'API response'
+
+if __name__ == '__main__':
+    app.run(debug=True)

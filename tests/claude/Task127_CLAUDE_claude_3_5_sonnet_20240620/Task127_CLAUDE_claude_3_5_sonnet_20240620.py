@@ -22,7 +22,7 @@ def copy_file(source_path, dest_path):
 
 if __name__ == "__main__":
     source_file = "source.txt"
-    temp_dir = "temp"
+    temp_dir = "/home/kali/CLionProjects/llm-generated-code-python/tests/claude/temp"
     temp_file = os.path.join(temp_dir, "temp_copy.txt")
 
     try:
@@ -39,7 +39,7 @@ if __name__ == "__main__":
                 print(f"Temporary file {temp_file} removed.")
             except OSError as e:
                 print(f"Error removing temporary file: {str(e)}")
-        
+
         if os.path.exists(temp_dir):
             try:
                 shutil.rmtree(temp_dir)

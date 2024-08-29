@@ -1,6 +1,6 @@
 import pymongo
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient("mongodb+srv://aboodbarghouti4:T7i9A8rCGAOF5iWS@cluster0.ww6rd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 mydb = myclient["mydatabase"]
 mycol = mydb["customers"]
 

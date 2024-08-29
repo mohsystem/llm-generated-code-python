@@ -9,9 +9,3 @@ def validate_url(url):
         r'(?::\d+)?'  # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
     return bool(pattern.match(url))
-
-url = input("Enter a URL: ")
-if validate_url(url):
-    print("URL is valid")
-else:
-    print("URL is not valid")

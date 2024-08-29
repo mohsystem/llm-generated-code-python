@@ -1,15 +1,39 @@
-import re
+import unittest
 
-def validate_ip(ip):
-    pattern = r'^(\d{1,3}\.){3}\d{1,3}$'
-    if not re.match(pattern, ip):
-        return False
-    parts = ip.split('.')
-    for part in parts:
-        if int(part) < 0 or int(part) > 255:
-            return False
-    return True
+from output.gtp4o.Task118_OPENAI_gpt_4o import validate_ip
 
-ips = ["192.168.1.1", "256.256.256.256", "123.045.067.089"]
-validated_ips = [ip for ip in ips if validate_ip(ip)]
-print("Validated IPs:", validated_ips)
+
+class TestIPValidation(unittest.TestCase):
+
+    def test_valid_ipv4_class_a(self):
+        self.assertTrue(validate_ip('10.0.0.1'))
+
+    def test_valid_ipv4_class_b(self):
+        self.assertTrue(validate_ip('172.16.0.1'))
+
+    def test_valid_ipv4_class_c(self):
+        self.assertTrue(validate_ip('192.168.0.1'))
+
+    def test_valid_ipv4_class_d(self):
+        self.assertTrue(validate_ip('224.0.0.1'))
+
+    def test_valid_ipv4_class_e(self):
+        self.assertTrue(validate_ip('2001:db8:ff00:42:8329:8329'))
+
+    def test_invalid_ipv4_with_non_numeric_octets(self):
+        self.assertFalse(validate_ip('192.abc.0.1'))
+
+    def test_invalid_ipv4_with_out_of_range_octets(self):
+        self.assertFalse(validate_ip('256.0.0.1'))
+
+    def test_invalid_ipv4_with_empty_octets(self):
+        self.assertFalse(validate_ip('192.168..1'))
+
+    def test_invalid_ipv4_with_missing_octets(self):
+        self.assertFalse(validate_ip('192.168.0'))
+
+    def test_invalid_ipv4_with_extra_octets(self):
+        self.assertFalse(validate_ip('192.168.0.1.1'))
+
+if __name__ == '__main__':
+    unittest.main()

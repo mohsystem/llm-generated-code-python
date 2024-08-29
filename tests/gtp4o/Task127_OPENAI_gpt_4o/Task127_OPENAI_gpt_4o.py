@@ -1,8 +1,8 @@
 import shutil
 import os
 
-source_path = '/path/to/source/file.txt'
-dest_path = '/path/to/dest/tmp_file.txt'
+source_path = '/home/kali/CLionProjects/llm-generated-code-python/tests/gtp4o/Task127_OPENAI_gpt_4o/sorce.txt'
+dest_path = '/home/kali/CLionProjects/llm-generated-code-python/tests/gtp4o/Task127_OPENAI_gpt_4o/tmp/sorce.txt'
 
 try:
     shutil.copy(source_path, dest_path)

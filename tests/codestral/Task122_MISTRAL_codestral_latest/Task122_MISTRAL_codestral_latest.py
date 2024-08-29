@@ -6,3 +6,4 @@ def signup(username, password):
 
 # Example usage
 signup("user1", "password1")
+print(passwords)

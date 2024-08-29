@@ -18,7 +18,7 @@ def login(username, password):
 
 def main():
     while True:
-        choice = input("1. Register\\n2. Login\\n3. Exit\\nChoose an option: ")
+        choice = input("1. Register\n2. Login\n3. Exit\nChoose an option: ")
         if choice == '1':
             username = input("Enter username: ")
             password = input("Enter password: ")

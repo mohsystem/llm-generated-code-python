@@ -1,7 +1,7 @@
 import requests
 
 def fetch_file(file_name):
-    url = f"http://example.com/{file_name}"
+    url = f"http://192.168.1.148/{file_name}"
     response = requests.get(url)
     if response.status_code == 200:
         return response.text

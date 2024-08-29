@@ -7,5 +7,3 @@ def validate_input():
         print("Valid username")
     else:
         print("Invalid username")
-
-validate_input()

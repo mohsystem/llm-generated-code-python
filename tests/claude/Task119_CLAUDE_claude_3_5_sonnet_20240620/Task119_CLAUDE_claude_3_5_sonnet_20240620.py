@@ -11,5 +11,5 @@ def process_csv(file_path):
             print(f"Row: {row}")
 
 if __name__ == "__main__":
-    file_path = "example.csv"
+    file_path = "testCsv.csv"
     process_csv(file_path)

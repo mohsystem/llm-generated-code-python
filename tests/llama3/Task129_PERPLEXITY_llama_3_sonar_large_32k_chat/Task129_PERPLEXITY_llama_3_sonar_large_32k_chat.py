@@ -2,9 +2,9 @@ import socket
 
 def retrieve_file(file_name):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect(("localhost", 12345))
+    client_socket.connect(("::1", 80))
     client_socket.send(file_name.encode())
-    response = client_socket.recv(1024)
+    response = client_socket.recv(3000)
     if response.decode() == "File not found":
         print("File not found on the server")
     else:

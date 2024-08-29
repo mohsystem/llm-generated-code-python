@@ -7,5 +7,5 @@ def process_csv(file_path):
             print(row)
 
 if __name__ == "__main__":
-    file_path = 'data.csv'
+    file_path = 'testCsv.csv'
     process_csv(file_path)

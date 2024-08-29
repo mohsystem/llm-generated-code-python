@@ -7,4 +7,4 @@ def process_csv(file_name):
             print(row)
 
 # Usage
-process_csv('your_file.csv')
+process_csv('testCsv.csv')

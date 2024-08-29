@@ -12,3 +12,5 @@ def load_key(filename):
     with open(filename, 'rb') as key_file:
         key = key_file.read()
     return key
+
+print(load_key())

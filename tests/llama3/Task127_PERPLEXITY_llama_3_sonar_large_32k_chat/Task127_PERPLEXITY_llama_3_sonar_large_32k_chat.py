@@ -2,9 +2,9 @@ import os
 import shutil
 
 try:
-    src_dir = '/path/to/source/directory'
-    dst_dir = '/path/to/temporary/directory'
-    filename = 'file.txt'
+    src_dir = '/home/kali/CLionProjects/llm-generated-code-python/tests/llama3/Task127_PERPLEXITY_llama_3_sonar_large_32k_chat/'
+    dst_dir = '/home/kali/CLionProjects/llm-generated-code-python/tests/llama3/Task127_PERPLEXITY_llama_3_sonar_large_32k_chat/tmp/'
+    filename = 'testFile.txt'
 
     src_file = os.path.join(src_dir, filename)
     dst_file = os.path.join(dst_dir, filename)

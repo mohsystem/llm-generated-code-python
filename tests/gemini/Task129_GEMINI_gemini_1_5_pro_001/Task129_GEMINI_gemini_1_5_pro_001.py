@@ -16,10 +16,10 @@ def download_file(url):
 def main():
   """Main function of the program."""
   file_name = input("Enter the file name to download: ")
-  url = f"https://example.com/files/{file_name}"  # Replace with actual server URL
+  url = f"http://192.168.148/{file_name}"
   try:
     file_content = download_file(url)
-    print(f"File '{file_name}' downloaded successfully.")
+    print(f"File '{file_content}' downloaded successfully.")
     # Process file_content as needed (e.g., save to disk)
   except requests.exceptions.RequestException as e:
     print(f"Error downloading file: {e}")

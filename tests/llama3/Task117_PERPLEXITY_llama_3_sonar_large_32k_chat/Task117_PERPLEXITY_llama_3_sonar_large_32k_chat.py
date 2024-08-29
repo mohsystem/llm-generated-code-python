@@ -10,5 +10,5 @@ def extract_tar(tar_file, extract_dir):
         tar_ref.extractall(extract_dir)
 
 # Example usage:
-extract_zip('example.zip', 'extracted_zip')
-extract_tar('example.tar', 'extracted_tar')
+extract_zip('testDir.zip', '.')
+# extract_tar('example.tar', 'extracted_tar')

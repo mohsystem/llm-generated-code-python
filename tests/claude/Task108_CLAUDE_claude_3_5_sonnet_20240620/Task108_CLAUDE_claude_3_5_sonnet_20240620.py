@@ -21,7 +21,7 @@ def main():
             RemoteObject: "remote_object"
         },
         ns=False,
-        host="localhost",
+        host="192.168.1.148",
         port=9090
     )
 

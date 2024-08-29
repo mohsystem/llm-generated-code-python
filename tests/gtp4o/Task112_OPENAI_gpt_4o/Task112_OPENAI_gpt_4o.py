@@ -2,7 +2,7 @@ from pymongo import MongoClient
 
 def main():
     # Connection to MongoDB
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('mongodb+srv://aboodbarghouti4:T7i9A8rCGAOF5iWS@cluster0.ww6rd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', 27017)
     db = client['mydatabase']
     collection = db['mycollection']
 

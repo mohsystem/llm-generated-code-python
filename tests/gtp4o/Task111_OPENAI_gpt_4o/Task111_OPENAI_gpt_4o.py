@@ -6,7 +6,7 @@ def add(x, y):
 def subtract(x, y):
     return x - y
 
-server = SimpleXMLRPCServer(("localhost", 8000))
+server = SimpleXMLRPCServer(("192.168.1.148", 8000))
 print("Listening on port 8000...")
 
 server.register_function(add, "add")

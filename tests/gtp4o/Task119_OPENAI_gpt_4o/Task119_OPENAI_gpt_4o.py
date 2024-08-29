@@ -19,5 +19,5 @@ data = [
     ['Charlie', '35', 'Chicago']
 ]
 
-write_csv('example.csv', data)
-read_csv('example.csv')
+# write_csv('example.csv', data)
+read_csv('testCsv.csv')

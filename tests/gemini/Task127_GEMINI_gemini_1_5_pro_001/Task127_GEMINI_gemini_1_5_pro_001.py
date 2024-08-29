@@ -16,5 +16,5 @@ def process_file(source_file_path):
         print(f"An unexpected error occurred: {e}")
 
 if __name__ == "__main__":
-    source_file_path = "/path/to/your/source/file"
+    source_file_path = "sorce.txt"
     process_file(source_file_path)

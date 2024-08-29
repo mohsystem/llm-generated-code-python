@@ -6,4 +6,4 @@ def parse_csv(file_name):
         for row in reader:
             print(row)
 
-parse_csv('example.csv')
+parse_csv('testCsv.txt')
