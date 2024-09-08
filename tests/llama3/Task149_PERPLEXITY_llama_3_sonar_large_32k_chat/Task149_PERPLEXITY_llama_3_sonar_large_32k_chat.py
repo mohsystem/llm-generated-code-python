@@ -19,5 +19,5 @@ q = Queue()
 q.enqueue("Apple")
 q.enqueue("Banana")
 q.enqueue("Cherry")
-print(q.dequeue())  # Apple
-print(q.peek())  # Banana
+print(q.dequeue())
+print(q.peek())

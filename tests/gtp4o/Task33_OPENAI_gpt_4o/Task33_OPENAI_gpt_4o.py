@@ -37,15 +37,15 @@ class TestTask33(unittest.TestCase):
 
     def test_long_queue(self):
         # Long queue of customers with minimal tills
-        self.assertEqual(queue_time([2, 2, 3, 3, 4, 4, 5, 5], 1), 28) # todo : fix in java
+        self.assertEqual(queue_time([2, 2, 3, 3, 4, 4, 5, 5], 1), 28)
 
     def test_complex_distribution(self):
         # Complex distribution of customers
-        self.assertEqual(queue_time([2, 3, 4, 3, 2, 1], 3), 5) # todo : fix in java
+        self.assertEqual(queue_time([2, 3, 4, 3, 2, 1], 3), 5)
 
     def test_high_number_of_tills(self):
         # High number of tills, fewer customers
-        self.assertEqual(queue_time([1, 1, 1, 1, 1, 1], 10), 1) # todo : fix in java
+        self.assertEqual(queue_time([1, 1, 1, 1, 1, 1], 10), 1)
 
 if __name__ == '__main__':
     unittest.main()
