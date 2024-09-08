@@ -1,52 +1,59 @@
-
+import unittest
 import threading
+from output.claude.Task196_CLAUDE_claude_3_5_sonnet_20240620 import ZeroEvenOdd
 
-class ZeroEvenOdd:
-    def __init__(self, n):
-        self.n = n
-        self.zero_sem = threading.Semaphore(1)
-        self.even_sem = threading.Semaphore(0)
-        self.odd_sem = threading.Semaphore(0)
-        self.current = 1
+class Task196_CLAUDE_claude_3_5_sonnet_20240620(unittest.TestCase):
 
-    def zero(self, printNumber):
-        for _ in range(self.n):
-            self.zero_sem.acquire()
-            printNumber(0)
-            if self.current % 2 == 0:
-                self.even_sem.release()
-            else:
-                self.odd_sem.release()
+    def run_test(self, n, expected):
+        output = []
 
-    def even(self, printNumber):
-        for _ in range(self.n // 2):
-            self.even_sem.acquire()
-            printNumber(self.current)
-            self.current += 1
-            self.zero_sem.release()
+        def printNumber(x):
+            output.append(str(x))
 
-    def odd(self, printNumber):
-        for _ in range((self.n + 1) // 2):
-            self.odd_sem.acquire()
-            printNumber(self.current)
-            self.current += 1
-            self.zero_sem.release()
+        zeo = ZeroEvenOdd(n)
+        threads = [
+            threading.Thread(target=zeo.zero, args=(printNumber,)),
+            threading.Thread(target=zeo.even, args=(printNumber,)),
+            threading.Thread(target=zeo.odd, args=(printNumber,))
+        ]
 
-# Example usage:
-def printNumber(x):
-    print(x, end='')
+        for t in threads:
+            t.start()
 
-n = 5
-zeo = ZeroEvenOdd(n)
+        for t in threads:
+            t.join()
 
-threads = [
-    threading.Thread(target=zeo.zero, args=(printNumber,)),
-    threading.Thread(target=zeo.even, args=(printNumber,)),
-    threading.Thread(target=zeo.odd, args=(printNumber,))
-]
+        self.assertEqual("".join(output), expected)
 
-for t in threads:
-    t.start()
+    def test_case_1(self):
+        self.run_test(1, "01")
 
-for t in threads:
-    t.join()
+    def test_case_2(self):
+        self.run_test(2, "0102")
+
+    def test_case_3(self):
+        self.run_test(3, "010203")
+
+    def test_case_4(self):
+        self.run_test(4, "01020304")
+
+    def test_case_5(self):
+        self.run_test(5, "0102030405")
+
+    def test_case_6(self):
+        self.run_test(6, "010203040506")
+
+    def test_case_7(self):
+        self.run_test(7, "01020304050607")
+
+    def test_case_8(self):
+        self.run_test(8, "0102030405060708")
+
+    def test_case_9(self):
+        self.run_test(9, "010203040506070809")
+
+    def test_case_10(self):
+        self.run_test(10, "010203040506070809010")
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,42 +1,55 @@
-class Clock:
-    def __init__(self, hour, minute):
-        self.hour = hour
-        self.minute = minute
-        self.normalize()
+import unittest
+from output.gtp4o.Task199_OPENAI_gpt_4o import Clock
 
-    def normalize(self):
-        if self.minute >= 60:
-            self.hour += self.minute // 60
-            self.minute = self.minute % 60
-        while self.minute < 0:
-            self.hour -= 1
-            self.minute += 60
-        self.hour = self.hour % 24
+class Task199_OPENAI_gpt_4o(unittest.TestCase):
 
-    def add_minutes(self, minutes):
-        self.minute += minutes
-        self.normalize()
+    def test_initial_time(self):
+        clock = Clock(10, 30)
+        self.assertEqual(str(clock), "10:30")
 
-    def subtract_minutes(self, minutes):
-        self.minute -= minutes
-        self.normalize()
+    def test_add_minutes(self):
+        clock = Clock(10, 30)
+        clock.add_minutes(60)
+        self.assertEqual(str(clock), "11:30")
 
-    def __eq__(self, other):
-        return self.hour == other.hour and self.minute == other.minute
+    def test_subtract_minutes(self):
+        clock = Clock(10, 30)
+        clock.subtract_minutes(90)
+        self.assertEqual(str(clock), "09:00")
 
-    def __str__(self):
-        return f"{self.hour:02}:{self.minute:02}"
+    def test_add_overflow_minutes(self):
+        clock = Clock(23, 45)
+        clock.add_minutes(30)
+        self.assertEqual(str(clock), "00:15")
 
-# Example usage
-clock1 = Clock(14, 30)
-clock2 = Clock(14, 30)
-clock3 = Clock(10, 45)
+    def test_subtract_underflow_minutes(self):
+        clock = Clock(0, 15)
+        clock.subtract_minutes(30)
+        self.assertEqual(str(clock), "23:45")
 
-clock1.add_minutes(90)
-clock2.subtract_minutes(70)
+    def test_equality_true(self):
+        clock1 = Clock(10, 0)
+        clock2 = Clock(10, 0)
+        self.assertTrue(clock1 == clock2)
 
-print(clock1)  # Should print 16:00
-print(clock2)  # Should print 13:20
-print(clock3)  # Should print 10:45
-print(clock1 == clock2)  # Should print False
-print(clock1 == Clock(16, 0))  # Should print True
+    def test_equality_false(self):
+        clock1 = Clock(10, 0)
+        clock2 = Clock(9, 0)
+        self.assertFalse(clock1 == clock2)
+
+    def test_midnight_edge_case(self):
+        clock = Clock(0, 0)
+        self.assertEqual(str(clock), "00:00")
+
+    def test_full_day_cycle(self):
+        clock = Clock(0, 0)
+        clock.add_minutes(1440)  # Adding 1440 minutes should wrap around to the same time
+        self.assertEqual(str(clock), "00:00")
+
+    def test_negative_overflow(self):
+        clock = Clock(1, 0)
+        clock.subtract_minutes(1440)  # Subtracting 1440 minutes should wrap around to the same time
+        self.assertEqual(str(clock), "01:00")
+
+if __name__ == '__main__':
+    unittest.main()

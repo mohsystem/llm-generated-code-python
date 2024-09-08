@@ -1,28 +1,57 @@
+import unittest
 
-class Clock:
-    def __init__(self, hour, minute):
-        self.minutes = (hour * 60 + minute) % 1440
+from output.claude.Task199_CLAUDE_claude_3_5_sonnet_20240620 import Clock
 
-    def __repr__(self):
-        hours, minutes = divmod(self.minutes, 60)
-        return f"{hours:02d}:{minutes:02d}"
 
-    def __eq__(self, other):
-        return self.minutes == other.minutes
+class Task199_CLAUDE_claude_3_5_sonnet_20240620Test(unittest.TestCase):
 
-    def __add__(self, minutes):
-        self.minutes = (self.minutes + minutes) % 1440
-        return self
+    def test_initial_time(self):
+        clock = Clock(10, 30)
+        self.assertEqual(str(clock), "10:30")
 
-    def __sub__(self, minutes):
-        self.minutes = (self.minutes - minutes) % 1440
-        return self
+    def test_add_minutes(self):
+        clock = Clock(10, 30)
+        clock += 60
+        self.assertEqual(str(clock), "11:30")
 
-# Example usage
-clock = Clock(10, 30)
-print(clock)  # 10:30
-clock.add(60)
-print(clock)  # 11:30
-clock.sub(90)
-print(clock)  # 10:00
-print(clock == Clock(10, 0))  # True
+    def test_subtract_minutes(self):
+        clock = Clock(10, 30)
+        clock -= 90
+        self.assertEqual(str(clock), "09:00")
+
+    def test_add_overflow_minutes(self):
+        clock = Clock(23, 45)
+        clock += 30
+        self.assertEqual(str(clock), "00:15")
+
+    def test_subtract_underflow_minutes(self):
+        clock = Clock(0, 15)
+        clock -= 30
+        self.assertEqual(str(clock), "23:45")
+
+    def test_equality_true(self):
+        clock1 = Clock(10, 0)
+        clock2 = Clock(10, 0)
+        self.assertTrue(clock1 == clock2)
+
+    def test_equality_false(self):
+        clock1 = Clock(10, 0)
+        clock2 = Clock(9, 0)
+        self.assertFalse(clock1 == clock2)
+
+    def test_midnight_edge_case(self):
+        clock = Clock(0, 0)
+        self.assertEqual(str(clock), "00:00")
+
+    def test_full_day_cycle(self):
+        clock = Clock(0, 0)
+        clock += 1440
+        self.assertEqual(str(clock), "00:00")
+
+    def test_negative_overflow(self):
+        clock = Clock(1, 0)
+        clock -= 1440
+        self.assertEqual(str(clock), "01:00")
+
+if __name__ == '__main__':
+    unittest.main()

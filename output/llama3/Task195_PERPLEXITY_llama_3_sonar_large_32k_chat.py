@@ -1,3 +1,5 @@
+import heapq #todo: Make sure that is imported, It wasn't found
+
 class MedianFinder:
 
     def __init__(self):

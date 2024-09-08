@@ -1,46 +1,61 @@
+import unittest
 import threading
 
-class ZeroEvenOdd:
-    def __init__(self, n):
-        self.n = n
-        self.lock = threading.Lock()
-        self.cond = threading.Condition(self.lock)
-        self.zero_turn = True
-        self.even_turn = False
-        self.odd_turn = False
-        self.count = 0
+from output.llama3.Task196_PERPLEXITY_llama_3_sonar_large_32k_chat import ZeroEvenOdd
 
-    def zero(self, printNumber: 'Callable[[int], None]') -> None:
-        for _ in range(self.n * 2):
-            with self.cond:
-                while not self.zero_turn:
-                    self.cond.wait()
-                printNumber(0)
-                self.count += 1
-                if self.count % 2 == 0:
-                    self.zero_turn = False
-                    self.even_turn = True
-                else:
-                    self.zero_turn = False
-                    self.odd_turn = True
-                self.cond.notify_all()
 
-    def even(self, printNumber: 'Callable[[int], None]') -> None:
-        for i in range(2, self.n * 2 + 1, 2):
-            with self.cond:
-                while not self.even_turn:
-                    self.cond.wait()
-                printNumber(i)
-                self.even_turn = False
-                self.zero_turn = True
-                self.cond.notify_all()
+class Task196_PERPLEXITY_llama_3_sonar_large_32k_chat(unittest.TestCase):
 
-    def odd(self, printNumber: 'Callable[[int], None]') -> None:
-        for i in range(1, self.n * 2, 2):
-            with self.cond:
-                while not self.odd_turn:
-                    self.cond.wait()
-                printNumber(i)
-                self.odd_turn = False
-                self.zero_turn = True
-                self.cond.notify_all()
+    def run_test(self, n, expected):
+        output = []
+
+        def printNumber(x):
+            output.append(str(x))
+
+        zeo = ZeroEvenOdd(n)
+        threads = [
+            threading.Thread(target=zeo.zero, args=(printNumber,)),
+            threading.Thread(target=zeo.even, args=(printNumber,)),
+            threading.Thread(target=zeo.odd, args=(printNumber,))
+        ]
+
+        for t in threads:
+            t.start()
+
+        for t in threads:
+            t.join()
+
+        self.assertEqual("".join(output), expected)
+
+    def test_case_1(self):
+        self.run_test(1, "01")
+
+    def test_case_2(self):
+        self.run_test(2, "0102")
+
+    def test_case_3(self):
+        self.run_test(3, "010203")
+
+    def test_case_4(self):
+        self.run_test(4, "01020304")
+
+    def test_case_5(self):
+        self.run_test(5, "0102030405")
+
+    def test_case_6(self):
+        self.run_test(6, "010203040506")
+
+    def test_case_7(self):
+        self.run_test(7, "01020304050607")
+
+    def test_case_8(self):
+        self.run_test(8, "0102030405060708")
+
+    def test_case_9(self):
+        self.run_test(9, "010203040506070809")
+
+    def test_case_10(self):
+        self.run_test(10, "010203040506070809010")
+
+if __name__ == "__main__":
+    unittest.main()
