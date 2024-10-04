@@ -20,4 +20,13 @@ data = [
 ]
 
 # write_csv('example.csv', data)
-read_csv('testCsv.csv')
+read_csv('tc1.csv')
+read_csv('tc2.csv')
+read_csv('tc3.csv')
+read_csv('tc4.csv')
+read_csv('tc5.csv')
+read_csv('tc6.csv')
+read_csv('tc7.csv')
+read_csv('tc8.csv')
+read_csv('tc9.csv')
+read_csv('tc10.csv')

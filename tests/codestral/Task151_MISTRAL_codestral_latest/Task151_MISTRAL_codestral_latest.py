@@ -1,49 +1,124 @@
-class Node:
-    def __init__(self, key):
-        self.left = None
-        self.right = None
-        self.val = key
+from output.codestral.Task151_MISTRAL_codestral_latest import *
 
-def insert(root, key):
-    if root is None:
-        return Node(key)
-    else:
-        if root.val < key:
-            root.right = insert(root.right, key)
-        else:
-            root.left = insert(root.left, key)
-    return root
+class TestBinarySearchTree:
+    def __init__(self):
+        self.run_tests()
 
-def deleteNode(root, key):
-    if root is None:
-        return root
-    if key < root.val:
-        root.left = deleteNode(root.left, key)
-    elif(key > root.val):
-        root.right = deleteNode(root.right, key)
-    else:
-        if root.left is None:
-            temp = root.right
-            root = None
-            return temp
-        elif root.right is None:
-            temp = root.left
-            root = None
-            return temp
-        temp = minValueNode(root.right)
-        root.val = temp.val
-        root.right = deleteNode(root.right, temp.val)
-    return root
+    def test_insert_and_search(self):
+        root = None
+        root = insert(root, 50)
+        root = insert(root, 30)
+        root = insert(root, 70)
+        root = insert(root, 20)
+        root = insert(root, 40)
+        root = insert(root, 60)
+        root = insert(root, 80)
+        assert search(root, 50) is not None, "Failed Test Case 1: test_insert_and_search"
+        assert search(root, 30) is not None, "Failed Test Case 1: test_insert_and_search"
+        assert search(root, 70) is not None, "Failed Test Case 1: test_insert_and_search"
+        assert search(root, 20) is not None, "Failed Test Case 1: test_insert_and_search"
+        assert search(root, 40) is not None, "Failed Test Case 1: test_insert_and_search"
+        assert search(root, 60) is not None, "Failed Test Case 1: test_insert_and_search"
+        assert search(root, 80) is not None, "Failed Test Case 1: test_insert_and_search"
+        assert search(root, 90) is None, "Failed Test Case 1: test_insert_and_search"
 
-def minValueNode(node):
-    current = node
-    while(current.left is not None):
-        current = current.left
-    return current
+    def test_delete_leaf_node(self):
+        root = None
+        root = insert(root, 50)
+        root = insert(root, 30)
+        root = insert(root, 20)
+        root = deleteNode(root, 20)
+        assert search(root, 20) is None, "Failed Test Case 2: test_delete_leaf_node"
 
-def search(root, key):
-    if root is None or root.val == key:
-        return root
-    if root.val < key:
-        return search(root.right, key)
-    return search(root.left, key)
+    def test_delete_node_with_one_child(self):
+        root = None
+        root = insert(root, 50)
+        root = insert(root, 30)
+        root = insert(root, 20)
+        root = insert(root, 25)
+        root = deleteNode(root, 20)
+        assert search(root, 20) is None, "Failed Test Case 3: test_delete_node_with_one_child"
+        assert search(root, 25) is not None, "Failed Test Case 3: test_delete_node_with_one_child"
+
+    def test_delete_node_with_two_children(self):
+        root = None
+        root = insert(root, 50)
+        root = insert(root, 30)
+        root = insert(root, 70)
+        root = insert(root, 20)
+        root = insert(root, 40)
+        root = deleteNode(root, 30)
+        assert search(root, 30) is None, "Failed Test Case 4: test_delete_node_with_two_children"
+        assert search(root, 20) is not None, "Failed Test Case 4: test_delete_node_with_two_children"
+        assert search(root, 40) is not None, "Failed Test Case 4: test_delete_node_with_two_children"
+
+    def test_delete_root(self):
+        root = None
+        root = insert(root, 50)
+        root = insert(root, 30)
+        root = insert(root, 70)
+        root = deleteNode(root, 50)
+        assert search(root, 50) is None, "Failed Test Case 5: test_delete_root"
+        assert search(root, 30) is not None, "Failed Test Case 5: test_delete_root"
+        assert search(root, 70) is not None, "Failed Test Case 5: test_delete_root"
+
+    def test_search_empty_tree(self):
+        root = None
+        assert search(root, 10) is None, "Failed Test Case 6: test_search_empty_tree"
+
+    def test_insert_multiple_nodes(self):
+        root = None
+        root = insert(root, 50)
+        root = insert(root, 30)
+        root = insert(root, 70)
+        root = insert(root, 20)
+        root = insert(root, 40)
+        root = insert(root, 60)
+        root = insert(root, 80)
+        assert search(root, 20) is not None, "Failed Test Case 7: test_insert_multiple_nodes"
+        assert search(root, 40) is not None, "Failed Test Case 7: test_insert_multiple_nodes"
+        assert search(root, 60) is not None, "Failed Test Case 7: test_insert_multiple_nodes"
+        assert search(root, 80) is not None, "Failed Test Case 7: test_insert_multiple_nodes"
+
+    def test_delete_node_with_no_children(self):
+        root = None
+        root = insert(root, 50)
+        root = deleteNode(root, 50)
+        assert search(root, 50) is None, "Failed Test Case 8: test_delete_node_with_no_children"
+
+    def test_delete_node_with_left_child(self):
+        root = None
+        root = insert(root, 50)
+        root = insert(root, 30)
+        root = insert(root, 20)
+        root = deleteNode(root, 30)
+        assert search(root, 30) is None, "Failed Test Case 9: test_delete_node_with_left_child"
+        assert search(root, 20) is not None, "Failed Test Case 9: test_delete_node_with_left_child"
+
+    def test_delete_node_with_right_child(self):
+        root = None
+        root = insert(root, 50)
+        root = insert(root, 70)
+        root = insert(root, 60)
+        root = deleteNode(root, 70)
+        assert search(root, 70) is None, "Failed Test Case 10: test_delete_node_with_right_child"
+        assert search(root, 60) is not None, "Failed Test Case 10: test_delete_node_with_right_child"
+
+    def run_tests(self):
+        self.test_insert_and_search()
+        self.test_delete_leaf_node()
+        self.test_delete_node_with_one_child()
+        self.test_delete_node_with_two_children()
+        self.test_delete_root()
+        self.test_search_empty_tree()
+        self.test_insert_multiple_nodes()
+        self.test_delete_node_with_no_children()
+        self.test_delete_node_with_left_child()
+        self.test_delete_node_with_right_child()
+        print("All test cases passed!")
+
+def main():
+    TestBinarySearchTree()
+
+if __name__ == "__main__":
+    main()

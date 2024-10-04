@@ -1,45 +1,61 @@
-class Solution:
-    def countSmaller(self, nums: List[int]) -> List[int]:
-        n = len(nums)
-        arr = [(nums[i], i) for i in range(n)]
-        res = [0] * n
+# from output.claude.Task169_CLAUDE_claude_3_5_sonnet_20240620 import Solution
+from output.gemini.Task169_GEMINI_gemini_1_5_pro_001 import Solution
 
-        def merge_sort(left, right):
-            if left >= right:
-                return
-            mid = (left + right) // 2
-            merge_sort(left, mid)
-            merge_sort(mid + 1, right)
-            merge(left, mid, right)
+class TestCountSmaller:
 
-        def merge(left, mid, right):
-            i = left
-            j = mid + 1
-            k = 0
-            temp = [0] * (right - left + 1)
-            smaller_count = 0
-            while i <= mid and j <= right:
-                if arr[i][0] <= arr[j][0]:
-                    temp[k] = arr[i]
-                    res[arr[i][1]] += smaller_count
-                    i += 1
-                    k += 1
-                else:
-                    temp[k] = arr[j]
-                    smaller_count += 1
-                    j += 1
-                    k += 1
-            while i <= mid:
-                temp[k] = arr[i]
-                res[arr[i][1]] += smaller_count
-                i += 1
-                k += 1
-            while j <= right:
-                temp[k] = arr[j]
-                j += 1
-                k += 1
-            for i in range(left, right + 1):
-                arr[i] = temp[i - left]
+    def test_case_1(self):
+        solution = Solution()
+        assert solution.countSmaller([5, 2, 6, 1]) == [2, 1, 1, 0]
 
-        merge_sort(0, n - 1)
-        return res
+    def test_case_2(self):
+        solution = Solution()
+        assert solution.countSmaller([-1]) == [0]
+
+    def test_case_3(self):
+        solution = Solution()
+        assert solution.countSmaller([-1, -1]) == [0, 0]
+
+    def test_case_4(self):
+        solution = Solution()
+        assert solution.countSmaller([1, 2, 3, 4]) == [0, 0, 0, 0]
+
+    def test_case_5(self):
+        solution = Solution()
+        assert solution.countSmaller([4, 3, 2, 1]) == [3, 2, 1, 0]
+
+    def test_case_6(self):
+        solution = Solution()
+        assert solution.countSmaller([2, 0, 1]) == [2, 0, 0]
+
+    def test_case_7(self):
+        solution = Solution()
+        assert solution.countSmaller([10, 3, 2, 5]) == [3, 1, 0, 0]
+
+    def test_case_8(self):
+        solution = Solution()
+        assert solution.countSmaller([1, 1, 1, 1]) == [0, 0, 0, 0]
+
+    def test_case_9(self):
+        solution = Solution()
+
+        assert solution.countSmaller([6, 1, 2, 7, 1]) == [3, 0, 1, 1, 0]
+
+    def test_case_10(self):
+        solution = Solution()
+        assert solution.countSmaller([5, 9, 2, 8, 6]) == [1, 3, 0, 1, 0]
+
+
+
+# Example of running each test manually
+test = TestCountSmaller()
+test.test_case_1()
+test.test_case_2()
+test.test_case_3()
+test.test_case_4()
+test.test_case_5()
+test.test_case_6()
+test.test_case_7()
+test.test_case_8()
+test.test_case_9()
+test.test_case_10()
+print("all task good")

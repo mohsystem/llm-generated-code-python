@@ -1,34 +1,57 @@
+from output.claude.Task149_CLAUDE_claude_3_5_sonnet_20240620 import *
 
-class Queue:
+
+class TestQueue:
     def __init__(self):
-        self.items = []
+        self.run_tests()
 
-    def is_empty(self):
-        return len(self.items) == 0
+    def test_enqueue_and_peek(self):
+        queue = Queue()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        assert queue.peek() == 1, "Failed Test Case 1: test_enqueue_and_peek"
 
-    def enqueue(self, item):
-        self.items.append(item)
+    def test_dequeue(self):
+        queue = Queue()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        assert queue.dequeue() == 1, "Failed Test Case 2: test_dequeue"
+        assert queue.peek() == 2, "Failed Test Case 3: test_dequeue"
 
-    def dequeue(self):
-        if not self.is_empty():
-            return self.items.pop(0)
-        return None
+    def test_empty_queue(self):
+        queue = Queue()
+        assert queue.is_empty() is True, "Failed Test Case 4: test_empty_queue"
+        queue.enqueue(1)
+        assert queue.is_empty() is False, "Failed Test Case 5: test_empty_queue"
 
-    def peek(self):
-        if not self.is_empty():
-            return self.items[0]
-        return None
+    def test_peek_empty_queue(self):
+        queue = Queue()
+        assert queue.peek() is None, "Failed Test Case 6: test_peek_empty_queue"
 
-# Example usage
+    def test_dequeue_empty_queue(self):
+        queue = Queue()
+        assert queue.dequeue() is None, "Failed Test Case 7: test_dequeue_empty_queue"
+
+    def test_multiple_enqueue_and_dequeue(self):
+        queue = Queue()
+        queue.enqueue(10)
+        queue.enqueue(20)
+        queue.enqueue(30)
+        assert queue.dequeue() == 10, "Failed Test Case 8: test_multiple_enqueue_and_dequeue"
+        assert queue.dequeue() == 20, "Failed Test Case 9: test_multiple_enqueue_and_dequeue"
+        assert queue.dequeue() == 30, "Failed Test Case 10: test_multiple_enqueue_and_dequeue"
+
+    def run_tests(self):
+        self.test_enqueue_and_peek()
+        self.test_dequeue()
+        self.test_empty_queue()
+        self.test_peek_empty_queue()
+        self.test_dequeue_empty_queue()
+        self.test_multiple_enqueue_and_dequeue()
+        print("All test cases passed!")
+
+def main():
+    TestQueue()
+
 if __name__ == "__main__":
-    queue = Queue()
-    queue.enqueue(1)
-    queue.enqueue(2)
-    queue.enqueue(3)
-    
-    print(queue.peek())  # Output: 1
-    print(queue.dequeue())  # Output: 1
-    print(queue.dequeue())  # Output: 2
-    print(queue.is_empty())  # Output: False
-    print(queue.dequeue())  # Output: 3
-    print(queue.is_empty())  # Output: True
+    main()

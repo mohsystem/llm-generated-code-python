@@ -1,74 +1,108 @@
+from output.claude.Task151_CLAUDE_claude_3_5_sonnet_20240620 import *
 
-class Node:
-    def __init__(self, key):
-        self.key = key
-        self.left = None
-        self.right = None
-
-class BinarySearchTree:
+class TestBinarySearchTree:
     def __init__(self):
-        self.root = None
+        self.run_tests()
 
-    def insert(self, key):
-        self.root = self._insert_recursive(self.root, key)
+    def test_insert_and_search(self):
+        bst = BinarySearchTree()
+        bst.insert(10)
+        bst.insert(20)
+        bst.insert(5)
+        assert bst.search(10) is True, "Failed Test Case 1: test_insert_and_search"
+        assert bst.search(20) is True, "Failed Test Case 1: test_insert_and_search"
+        assert bst.search(5) is True, "Failed Test Case 1: test_insert_and_search"
+        assert bst.search(15) is False, "Failed Test Case 1: test_insert_and_search"
 
-    def _insert_recursive(self, root, key):
-        if root is None:
-            return Node(key)
-        if key < root.key:
-            root.left = self._insert_recursive(root.left, key)
-        else:
-            root.right = self._insert_recursive(root.right, key)
-        return root
+    def test_delete_leaf_node(self):
+        bst = BinarySearchTree()
+        bst.insert(10)
+        bst.insert(5)
+        bst.delete(5)
+        assert bst.search(5) is False, "Failed Test Case 2: test_delete_leaf_node"
 
-    def delete(self, key):
-        self.root = self._delete_recursive(self.root, key)
+    def test_delete_node_with_one_child(self):
+        bst = BinarySearchTree()
+        bst.insert(10)
+        bst.insert(5)
+        bst.insert(7)
+        bst.delete(5)
+        assert bst.search(5) is False, "Failed Test Case 3: test_delete_node_with_one_child"
+        assert bst.search(7) is True, "Failed Test Case 3: test_delete_node_with_one_child"
 
-    def _delete_recursive(self, root, key):
-        if root is None:
-            return root
-        if key < root.key:
-            root.left = self._delete_recursive(root.left, key)
-        elif key > root.key:
-            root.right = self._delete_recursive(root.right, key)
-        else:
-            if root.left is None:
-                return root.right
-            elif root.right is None:
-                return root.left
-            temp = self._min_value_node(root.right)
-            root.key = temp.key
-            root.right = self._delete_recursive(root.right, temp.key)
-        return root
+    def test_delete_node_with_two_children(self):
+        bst = BinarySearchTree()
+        bst.insert(10)
+        bst.insert(5)
+        bst.insert(15)
+        bst.insert(12)
+        bst.delete(15)
+        assert bst.search(15) is False, "Failed Test Case 4: test_delete_node_with_two_children"
+        assert bst.search(12) is True, "Failed Test Case 4: test_delete_node_with_two_children"
 
-    def _min_value_node(self, node):
-        current = node
-        while current.left is not None:
-            current = current.left
-        return current
+    def test_delete_root(self):
+        bst = BinarySearchTree()
+        bst.insert(10)
+        bst.insert(5)
+        bst.insert(15)
+        bst.delete(10)
+        assert bst.search(10) is False, "Failed Test Case 5: test_delete_root"
+        assert bst.search(5) is True, "Failed Test Case 5: test_delete_root"
+        assert bst.search(15) is True, "Failed Test Case 5: test_delete_root"
 
-    def search(self, key):
-        return self._search_recursive(self.root, key)
+    def test_search_empty_tree(self):
+        bst = BinarySearchTree()
+        assert bst.search(10) is False, "Failed Test Case 6: test_search_empty_tree"
 
-    def _search_recursive(self, root, key):
-        if root is None or root.key == key:
-            return root
-        if key < root.key:
-            return self._search_recursive(root.left, key)
-        return self._search_recursive(root.right, key)
+    def test_insert_multiple_nodes(self):
+        bst = BinarySearchTree()
+        bst.insert(10)
+        bst.insert(5)
+        bst.insert(15)
+        bst.insert(7)
+        bst.insert(12)
+        assert bst.search(7) is True, "Failed Test Case 7: test_insert_multiple_nodes"
+        assert bst.search(12) is True, "Failed Test Case 7: test_insert_multiple_nodes"
 
-# Example usage
-bst = BinarySearchTree()
-bst.insert(50)
-bst.insert(30)
-bst.insert(70)
-bst.insert(20)
-bst.insert(40)
-bst.insert(60)
-bst.insert(80)
+    def test_delete_node_with_no_children(self):
+        bst = BinarySearchTree()
+        bst.insert(10)
+        bst.delete(10)
+        assert bst.search(10) is False, "Failed Test Case 8: test_delete_node_with_no_children"
 
-print("Search for 40:", "Found" if bst.search(40) else "Not Found")
-print("Search for 90:", "Found" if bst.search(90) else "Not Found")
+    def test_delete_node_with_left_child(self):
+        bst = BinarySearchTree()
+        bst.insert(10)
+        bst.insert(5)
+        bst.insert(3)
+        bst.delete(5)
+        assert bst.search(5) is False, "Failed Test Case 9: test_delete_node_with_left_child"
+        assert bst.search(3) is True, "Failed Test Case 9: test_delete_node_with_left_child"
 
-bst.delete(40)
-print("Search for 40 after deletion:", "Found" if bst.search(40) else "Not Found")
+    def test_delete_node_with_right_child(self):
+        bst = BinarySearchTree()
+        bst.insert(10)
+        bst.insert(15)
+        bst.insert(20)
+        bst.delete(15)
+        assert bst.search(15) is False, "Failed Test Case 10: test_delete_node_with_right_child"
+        assert bst.search(20) is True, "Failed Test Case 10: test_delete_node_with_right_child"
+
+    def run_tests(self):
+        self.test_insert_and_search()
+        self.test_delete_leaf_node()
+        self.test_delete_node_with_one_child()
+        self.test_delete_node_with_two_children()
+        self.test_delete_root()
+        self.test_search_empty_tree()
+        self.test_insert_multiple_nodes()
+        self.test_delete_node_with_no_children()
+        self.test_delete_node_with_left_child()
+        self.test_delete_node_with_right_child()
+        print("All test cases passed!")
+
+def main():
+    TestBinarySearchTree()
+
+if __name__ == "__main__":
+    main()

@@ -1,3 +1,5 @@
+from typing import List
+
 
 class Solution:
     def reversePairs(self, nums: List[int]) -> int:
@@ -42,9 +44,9 @@ class Solution:
         
         return mergeSort(nums, 0, len(nums) - 1)
 
-# Example usage
-nums1 = [1,3,2,3,1]
-nums2 = [2,4,3,5,1]
-solution = Solution()
-print(solution.reversePairs(nums1))  # Output: 2
-print(solution.reversePairs(nums2))  # Output: 3
+# # Example usage
+# nums1 = [1,3,2,3,1]
+# nums2 = [2,4,3,5,1]
+# solution = Solution()
+# print(solution.reversePairs(nums1))  # Output: 2
+# print(solution.reversePairs(nums2))  # Output: 3

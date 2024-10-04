@@ -2,12 +2,14 @@
 import ctypes
 
 # Allocate memory buffer
-buffer_size = 100
+buffer_size = 10
 buffer = (ctypes.c_char * buffer_size)()
+print(buffer)
 
 # Initialize buffer with some data
 for i in range(buffer_size):
     buffer[i] = chr(65 + (i % 26))
+    print(buffer[i])
 
 while True:
     try:

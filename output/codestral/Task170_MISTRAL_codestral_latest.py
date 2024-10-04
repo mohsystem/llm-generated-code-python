@@ -23,5 +23,5 @@ def count_range_sum(nums, lower, upper):
             count -= upper_bound - lower_bound
         prefix_sums[start:end+1] = sorted(prefix_sums[start:end+1])
         return count
-
+    print(count_while_merge_sort(0, len(nums)))
     return count_while_merge_sort(0, len(nums))

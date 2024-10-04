@@ -19,9 +19,9 @@ class Stack:
         return len(self.items) == 0
 
 # Example usage:
-stack = Stack()
-stack.push(1)
-stack.push(2)
-stack.push(3)
-print(stack.pop())  # Output: 3
-print(stack.peek())  # Output: 2
+# stack = Stack()
+# stack.push(1)
+# stack.push(2)
+# stack.push(3)
+# print(stack.pop())  # Output: 3
+# print(stack.peek())  # Output: 2

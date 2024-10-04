@@ -44,7 +44,7 @@ class LinkedList:
         while current:
             print(current.data, end=" -> ")
             current = current.next
-        print("None")
+        return None
 
 # Example usage
 if __name__ == "__main__":

@@ -5,5 +5,5 @@ def count_smaller(nums):
         result.append(count)
     return result
 
-nums = [int(x) for x in input().split()]
-print(count_smaller(nums))
+# nums = [int(x) for x in input().split()]
+# print(count_smaller(nums))

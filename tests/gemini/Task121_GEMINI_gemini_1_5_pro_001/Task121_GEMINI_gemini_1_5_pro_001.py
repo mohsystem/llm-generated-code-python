@@ -12,7 +12,8 @@ if file_path:
         with open(file_path, 'rb') as file:
             # Process the uploaded file here
             file_content = file.read()
-            # ...
+            print(file_content)
+    
         messagebox.showinfo("Success", "File uploaded successfully!")
 
     except FileNotFoundError:

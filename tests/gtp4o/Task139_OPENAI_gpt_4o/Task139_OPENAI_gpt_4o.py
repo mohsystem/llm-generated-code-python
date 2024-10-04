@@ -1,64 +1,60 @@
-import math
-import unittest
+# from output.codestral.Task149_MISTRAL_codestral_latest import *
+# from output.gemini.Task149_GEMINI_gemini_1_5_pro_001 import *
+# from output.gtp4o.Task149_OPENAI_gpt_4o import *
+# from output.llama3.Task149_PERPLEXITY_llama_3_sonar_large_32k_chat import *
 
 
-def radius(input):
-    radius = float(input)
-    area = 3.14159 * (radius ** 2)
-    return area
+class TestQueue:
+    def __init__(self):
+        self.run_tests()
 
+    def test_enqueue_and_peek(self):
+        queue = Queue()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        assert queue.peek() == 1, "Failed Test Case 1: test_enqueue_and_peek"
 
-class TestCircleAreaFunction(unittest.TestCase):
+    def test_dequeue(self):
+        queue = Queue()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        assert queue.dequeue() == 1, "Failed Test Case 2: test_dequeue"
+        assert queue.peek() == 2, "Failed Test Case 3: test_dequeue"
 
-    def test_radius_zero(self):
-        # Test with radius = 0
-        result = radius(0)
-        self.assertEqual(result, 0.0)
+    def test_empty_queue(self):
+        queue = Queue()
+        # assert queue.is_empty() is True, "Failed Test Case 4: test_empty_queue"
+        queue.enqueue(1)
+        # assert queue.is_empty() is False, "Failed Test Case 5: test_empty_queue"
 
-    def test_radius_one(self):
-        # Test with radius = 1
-        result = radius(1)
-        self.assertEqual(result, math.pi * 1 ** 2)
+    def test_peek_empty_queue(self):
+        queue = Queue()
+        assert queue.peek() is None, "Failed Test Case 6: test_peek_empty_queue"
 
-    def test_radius_two_point_five(self):
-        # Test with radius = 2.5
-        result = radius(2.5)
-        self.assertEqual(result, math.pi * 2.5 ** 2)
+    def test_dequeue_empty_queue(self):
+        queue = Queue()
+        assert queue.dequeue() is None, "Failed Test Case 7: test_dequeue_empty_queue"
 
-    def test_radius_ten(self):
-        # Test with radius = 10
-        result = radius(10)
-        self.assertEqual(result, math.pi * 10 ** 2)
+    def test_multiple_enqueue_and_dequeue(self):
+        queue = Queue()
+        queue.enqueue(10)
+        queue.enqueue(20)
+        queue.enqueue(30)
+        assert queue.dequeue() == 10, "Failed Test Case 8: test_multiple_enqueue_and_dequeue"
+        assert queue.dequeue() == 20, "Failed Test Case 9: test_multiple_enqueue_and_dequeue"
+        assert queue.dequeue() == 30, "Failed Test Case 10: test_multiple_enqueue_and_dequeue"
 
-    def test_radius_negative(self):
-        # Test with negative radius (-5)
-        result = radius(-5)
-        self.assertEqual(result, math.pi * (-5) ** 2)
+    def run_tests(self):
+        self.test_enqueue_and_peek()
+        self.test_dequeue()
+        self.test_empty_queue()
+        self.test_peek_empty_queue()
+        self.test_dequeue_empty_queue()
+        self.test_multiple_enqueue_and_dequeue()
+        print("All test cases passed!")
 
-    def test_radius_large(self):
-        # Test with radius = 1000
-        result = radius(1000)
-        self.assertEqual(result, math.pi * 1000 ** 2)
+def main():
+    TestQueue()
 
-    def test_radius_pi(self):
-        # Test with floating-point radius (3.1416)
-        result = radius(3.1416)
-        self.assertEqual(result, math.pi * 3.1416 ** 2)
-
-    def test_radius_small(self):
-        # Test with a small radius (0.1)
-        result = radius(0.1)
-        self.assertEqual(result, math.pi * 0.1 ** 2)
-
-    def test_radius_large_floating(self):
-        # Test with large floating-point radius (1234.567)
-        result = radius(1234.567)
-        self.assertEqual(result, math.pi * 1234.567 ** 2)
-
-    def test_radius_decimal(self):
-        # Test with a precise decimal radius (9.99)
-        result = radius(9.99)
-        self.assertEqual(result, math.pi * 9.99 ** 2)
-
-if __name__ == '__main__':
-    unittest.main()
+if __name__ == "__main__":
+    main()

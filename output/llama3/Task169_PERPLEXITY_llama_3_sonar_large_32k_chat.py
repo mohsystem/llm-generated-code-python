@@ -1,3 +1,6 @@
+import bisect
+
+
 def countSmaller(nums):
     def count(t):
         res = []

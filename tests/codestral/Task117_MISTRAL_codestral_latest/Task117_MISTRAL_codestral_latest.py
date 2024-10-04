@@ -16,4 +16,4 @@ def extract_archive(file_path):
         print("Unsupported file format")
 
 # Usage
-extract_archive('testDir.zip')
+extract_archive('testZip.zip')

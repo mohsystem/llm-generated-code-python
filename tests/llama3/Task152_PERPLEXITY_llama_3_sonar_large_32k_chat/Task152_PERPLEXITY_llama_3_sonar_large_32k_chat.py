@@ -1,76 +1,45 @@
-class HashTable:
-    def __init__(self):
-        self.size = 11
-        self.slots = [None] * self.size
-        self.data = [None] * self.size
+from output.llama3.Task152_PERPLEXITY_llama_3_sonar_large_32k_chat import *
 
-    def put(self, key, data):
-        hashvalue = self.hashfunction(key, len(self.slots))
+def test_hash_table():
+    table = HashTable()
 
-        if self.slots[hashvalue] == None:
-            self.slots[hashvalue] = key
-            self.data[hashvalue] = data
-        else:
-            if self.slots[hashvalue] == key:
-                self.data[hashvalue] = data  # replace
-            else:
-                nextslot = self.rehash(hashvalue, len(self.slots))
-                while self.slots[nextslot] != None and self.slots[nextslot] != key:
-                    nextslot = self.rehash(nextslot, len(self.slots))
+    # Test put and get
+    table.put(1, "value1")
+    assert table.get(1) == "value1", "Test Case 1 Failed"
 
-                if self.slots[nextslot] == None:
-                    self.slots[nextslot] = key
-                    self.data[nextslot] = data
-                else:
-                    self.data[nextslot] = data  # replace
+    # Test put overwrite
+    table.put(1, "value2")
+    assert table.get(1) == "value2", "Test Case 2 Failed"
 
-    def hashfunction(self, key, size):
-        return key % size
+    # Test get non-existent key
+    assert table.get(2) is None, "Test Case 3 Failed"
 
-    def rehash(self, oldhash, size):
-        return (oldhash + 1) % size
+    # Test put and get with rehash
+    table.put(12, "value12")  # This should collide with key 1
+    assert table.get(12) == "value12", "Test Case 4 Failed"
 
-    def get(self, key):
-        startslot = self.hashfunction(key, len(self.slots))
+    # Test delete (by setting value to None) and get
+    table.put(1, None)
+    assert table.get(1) is None, "Test Case 5 Failed"
 
-        data = None
-        stop = False
-        found = False
-        position = startslot
-        while self.slots[position] != None and not found and not stop:
-            if self.slots[position] == key:
-                found = True
-                data = self.data[position]
-            else:
-                position = self.rehash(position, len(self.slots))
-                if position == startslot:
-                    stop = True
-        return data
+    # Test put multiple keys
+    table.put(1, "value1")
+    table.put(22, "value22")  # This should collide with key 12
+    table.put(33, "value33")  # This should collide with key 22
+    assert table.get(1) == "value1", "Test Case 6 Failed"
+    assert table.get(22) == "value22", "Test Case 7 Failed"
+    assert table.get(33) == "value33", "Test Case 8 Failed"
 
-    def __getitem__(self, key):
-        return self.get(key)
+    # Test key replacement with collisions
+    table.put(1, "new_value1")  # Replace existing value at the same index
+    assert table.get(1) == "new_value1", "Test Case 9 Failed"
 
-    def __setitem__(self, key, data):
-        self.put(key, data)
+    # Test empty table initialization
+    empty_table = HashTable()
+    assert all(x is None for x in empty_table.slots), "Test Case 10 Failed"
+    assert all(x is None for x in empty_table.data), "Test Case 11 Failed"
 
+    print("All test cases passed!")
 
-H = HashTable()
-H[54] = "cat"
-H[26] = "dog"
-H[93] = "lion"
-H[17] = "tiger"
-H[77] = "bird"
-H[31] = "cow"
-H[44] = "goat"
-H[55] = "pig"
-H[20] = "chicken"
-
-print(H.slots)
-print(H.data)
-
-print(H[20])
-
-print(H[17])
-H[20] = 'duck'
-print(H[20])
-print(H[99])
+if __name__ == "__main__":
+    test_hash_table()

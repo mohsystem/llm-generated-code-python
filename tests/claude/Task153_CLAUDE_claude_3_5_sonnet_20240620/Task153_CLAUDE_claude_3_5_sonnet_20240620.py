@@ -25,5 +25,5 @@ graph = {
     'F': ['C', 'E']
 }
 
-print("BFS starting from vertex 'A':")
-bfs(graph, 'A')
+print("BFS starting from vertex 'D':")
+bfs(graph, 'D')

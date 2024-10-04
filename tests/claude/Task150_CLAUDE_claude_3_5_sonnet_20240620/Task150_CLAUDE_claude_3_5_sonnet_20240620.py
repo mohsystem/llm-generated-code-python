@@ -1,59 +1,105 @@
+from output.codestral.Task150_MISTRAL_codestral_latest import *
 
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
 
-class LinkedList:
+class TestSinglyLinkedList:
     def __init__(self):
-        self.head = None
+        self.run_tests()
 
-    def insert(self, data):
-        new_node = Node(data)
-        if not self.head:
-            self.head = new_node
-        else:
-            current = self.head
-            while current.next:
-                current = current.next
-            current.next = new_node
+    def test_insert(self):
+        sll = SinglyLinkedList()
+        sll.insert(10)
+        sll.insert(20)
+        # Check the internal state
+        assert sll.head.data == 10, "Failed Test Case 1: test_insert"
+        assert sll.head.next.data == 20, "Failed Test Case 1: test_insert"
 
-    def delete(self, data):
-        if not self.head:
-            return
-        if self.head.data == data:
-            self.head = self.head.next
-            return
-        current = self.head
-        while current.next:
-            if current.next.data == data:
-                current.next = current.next.next
-                return
-            current = current.next
+    def test_delete(self):
+        sll = SinglyLinkedList()
+        sll.insert(10)
+        sll.insert(20)
+        sll.insert(30)
+        sll.delete(20)
+        # Check the internal state
+        assert sll.head.data == 10, "Failed Test Case 2: test_delete"
+        assert sll.head.next.data == 30, "Failed Test Case 2: test_delete"
 
-    def search(self, data):
-        current = self.head
-        while current:
-            if current.data == data:
-                return True
-            current = current.next
-        return False
+    def test_delete_non_existent(self):
+        sll = SinglyLinkedList()
+        sll.insert(10)
+        sll.insert(20)
+        sll.delete(40)
+        # Check the internal state
+        assert sll.head.data == 10, "Failed Test Case 3: test_delete_non_existent"
+        assert sll.head.next.data == 20, "Failed Test Case 3: test_delete_non_existent"
 
-    def display(self):
-        current = self.head
-        while current:
-            print(current.data, end=" -> ")
-            current = current.next
-        print("None")
+    def test_delete_head(self):
+        sll = SinglyLinkedList()
+        sll.insert(10)
+        sll.insert(20)
+        sll.delete(10)
+        # Check the internal state
+        assert sll.head.data == 20, "Failed Test Case 4: test_delete_head"
 
-# Example usage
+    def test_delete_last_element(self):
+        sll = SinglyLinkedList()
+        sll.insert(10)
+        sll.insert(20)
+        sll.delete(20)
+        # Check the internal state
+        assert sll.head.data == 10, "Failed Test Case 5: test_delete_last_element"
+        assert sll.head.next is None, "Failed Test Case 5: test_delete_last_element"
+
+    def test_search_found(self):
+        sll = SinglyLinkedList()
+        sll.insert(10)
+        sll.insert(20)
+        result = sll.search(20)
+        assert result is True, "Failed Test Case 6: test_search_found"
+
+    def test_search_not_found(self):
+        sll = SinglyLinkedList()
+        sll.insert(10)
+        sll.insert(20)
+        result = sll.search(30)
+        assert result is False, "Failed Test Case 7: test_search_not_found"
+
+    def test_insert_multiple(self):
+        sll = SinglyLinkedList()
+        sll.insert(10)
+        sll.insert(20)
+        sll.insert(30)
+        sll.insert(40)
+        # Check the internal state
+        assert sll.head.data == 10, "Failed Test Case 8: test_insert_multiple"
+        assert sll.head.next.data == 20, "Failed Test Case 8: test_insert_multiple"
+        assert sll.head.next.next.data == 30, "Failed Test Case 8: test_insert_multiple"
+        assert sll.head.next.next.next.data == 40, "Failed Test Case 8: test_insert_multiple"
+
+    def test_empty_list(self):
+        sll = SinglyLinkedList()
+        # Check the internal state
+        assert sll.head is None, "Failed Test Case 9: test_empty_list"
+
+    def test_search_empty_list(self):
+        sll = SinglyLinkedList()
+        result = sll.search(10)
+        assert result is False, "Failed Test Case 10: test_search_empty_list"
+
+    def run_tests(self):
+        self.test_insert()
+        self.test_delete()
+        self.test_delete_non_existent()
+        self.test_delete_head()
+        self.test_delete_last_element()
+        self.test_search_found()
+        self.test_search_not_found()
+        self.test_insert_multiple()
+        self.test_empty_list()
+        self.test_search_empty_list()
+        print("All test cases passed!")
+
+def main():
+    TestSinglyLinkedList()
+
 if __name__ == "__main__":
-    ll = LinkedList()
-    ll.insert(1)
-    ll.insert(2)
-    ll.insert(3)
-    ll.display()
-    print("Search 2:", ll.search(2))
-    ll.delete(2)
-    ll.display()
-    print("Search 2:", ll.search(2))
+    main()
