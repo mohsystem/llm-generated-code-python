@@ -48,7 +48,3 @@ def findInMountainArray(target: int, mountain_arr: 'MountainArray') -> int:
     if index != -1:
         return index
     return binarySearch(mountain_arr, target, peak + 1, mountain_arr.length() - 1, False)
-
-# Example usage:
-mountain_arr = MountainArray([1, 2, 3, 4, 5, 3, 1])
-print(findInMountainArray(3, mountain_arr))  # Output: 2

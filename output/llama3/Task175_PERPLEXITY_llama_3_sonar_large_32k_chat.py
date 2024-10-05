@@ -1,3 +1,18 @@
+# todo : edit by ahmadner , look to git history
+class MountainArray:
+    def __init__(self, arr):
+        self.arr = arr
+
+    def get(self, index: int) -> int:
+        return self.arr[index]
+
+    def length(self) -> int:
+        return len(self.arr)
+
+    def printIt(self): # just for test ( print full array )
+        return self.arr
+
+
 class Solution:
     def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:
         n = mountain_arr.length()

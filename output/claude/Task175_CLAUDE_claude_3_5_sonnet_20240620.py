@@ -1,8 +1,18 @@
 
 # """\n# This is MountainArray's API interface.\n# You should not implement it, or speculate about its implementation\n# """
-#class MountainArray:
-#    def get(self, index: int) -> int:
-#    def length(self) -> int:
+# todo : edit by ahmadner , look to git history
+class MountainArray:
+    def __init__(self, arr):
+        self.arr = arr
+
+    def get(self, index: int) -> int:
+        return self.arr[index]
+
+    def length(self) -> int:
+        return len(self.arr)
+
+    def printIt(self): # just for test ( print full array )
+        return self.arr
 
 class Solution:
     def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:

@@ -1,46 +1,16 @@
-# Python code
-from collections import defaultdict
+from output.codestral.Task173_MISTRAL_codestral_latest import longest_dup_substring
+from output.gemini.Task173_GEMINI_gemini_1_5_pro_001 import longestDupSubstring as longest_dup_substring
+from output.gtp4o.Task173_OPENAI_gpt_4o import longestDupSubstring as longest_dup_substring
+from output.llama3.Task173_PERPLEXITY_llama_3_sonar_large_32k_chat import longestDupSubstring as longest_dup_substring
 
-def longestDupSubstring(s):
-    def roll_hash(s, length):
-        p = 31
-        m = 2**61 - 1
-        hash_value = 0
-        p_pow = 1
-        for i in range(length):
-            hash_value = (hash_value + (ord(s[i]) - ord('a') + 1) * p_pow) % m
-            p_pow = (p_pow * p) % m
-        return hash_value
-    
-    def search_substring(s, length):
-        hashes = defaultdict(list)
-        p = 31
-        m = 2**61 - 1
-        p_pow = pow(p, length - 1, m)
-        curr_hash = roll_hash(s, length)
-        hashes[curr_hash].append(0)
-        
-        for i in range(1, len(s) - length + 1):
-            curr_hash = (curr_hash - (ord(s[i - 1]) - ord('a') + 1)) % m
-            curr_hash = (curr_hash * p + (ord(s[i + length - 1]) - ord('a') + 1)) % m
-            if curr_hash in hashes:
-                for start in hashes[curr_hash]:
-                    if s[start:start+length] == s[i:i+length]:
-                        return s[start:start+length]
-            hashes[curr_hash].append(i)
-        return ""
-    
-    left, right, result = 1, len(s) - 1, ""
-    while left <= right:
-        mid = left + (right - left) // 2
-        substring = search_substring(s, mid)
-        if substring:
-            result = substring
-            left = mid + 1
-        else:
-            right = mid - 1
-    return result
-
-# Example usage:
-print(longestDupSubstring("banana"))  # Output: "ana"
-print(longestDupSubstring("abcd"))    # Output: ""
+assert longest_dup_substring("abcabcabcd") == "abcabc", longest_dup_substring("abcabcabcd")
+assert longest_dup_substring("abababcababab") == "ababab", "Test Case 2 Failed"
+assert longest_dup_substring("abacabadabacaba") == "abacaba", "Test Case 3 Failed"
+assert longest_dup_substring("abcdefgabcdefgabcdefg") == "abcdefgabcdefg", "Test Case 4 Failed"
+assert longest_dup_substring("aabbaabbaaccddcc") == "aabbaa", longest_dup_substring("aabbaabbaaccddcc")
+assert longest_dup_substring("abcdabcdeabcdabcdeabcd") == "abcdabcdeabcd", "Test Case 6 Failed"
+assert longest_dup_substring("abcdefghijklmnoabcdefghijklmno") == "abcdefghijklmno", "Test Case 7 Failed"
+assert longest_dup_substring("xyzxyzxyzxyzx") == "xyzxyzxyzx", longest_dup_substring("xyzxyzxyzxyzx")
+assert longest_dup_substring("abcdefgh12345678abcdefgh") == "abcdefgh", "Test Case 9 Failed"
+assert longest_dup_substring("abcxabcyabczabcdabc") == "abc", longest_dup_substring("abcxabcyabczabcdabc")
+print("All challenging test cases passed!")
