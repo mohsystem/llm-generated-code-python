@@ -1,90 +1,42 @@
+from output.claude.Task181_CLAUDE_claude_3_5_sonnet_20240620 import *
 
-import threading
-from typing import Dict
+def test_bank():
+    bank = Bank()
 
-class BankAccount:
-    def __init__(self, account_number: str, initial_balance: float = 0):
-        self.account_number = account_number
-        self.balance = initial_balance
-        self.is_open = True
-        self.lock = threading.Lock()
+    # Test 1: Open a new account
+    assert bank.open_account("12345", 1000) == True
 
-    def deposit(self, amount: float) -> bool:
-        with self.lock:
-            if not self.is_open:
-                return False
-            if amount <= 0:
-                return False
-            self.balance += amount
-            return True
+    # Test 2: Open the same account again (should fail)
+    assert bank.open_account("12345") == False
 
-    def withdraw(self, amount: float) -> bool:
-        with self.lock:
-            if not self.is_open:
-                return False
-            if amount <= 0 or amount > self.balance:
-                return False
-            self.balance -= amount
-            return True
+    # Test 3: Deposit money into the account
+    assert bank.deposit("12345", 500) == True
 
-    def close(self) -> bool:
-        with self.lock:
-            if not self.is_open:
-                return False
-            self.is_open = False
-            return True
+    # Test 4: Withdraw money from the account
+    assert bank.withdraw("12345", 200) == True
 
-class Bank:
-    def __init__(self):
-        self.accounts: Dict[str, BankAccount] = {}
-        self.lock = threading.Lock()
+    # Test 5: Withdraw more money than available (should fail)
+    assert bank.withdraw("12345", 2000) == False
 
-    def open_account(self, account_number: str, initial_balance: float = 0) -> bool:
-        with self.lock:
-            if account_number in self.accounts:
-                return False
-            self.accounts[account_number] = BankAccount(account_number, initial_balance)
-            return True
+    # Test 6: Close the account
+    assert bank.close_account("12345") == True
 
-    def close_account(self, account_number: str) -> bool:
-        with self.lock:
-            if account_number not in self.accounts:
-                return False
-            return self.accounts[account_number].close()
+    # Test 7: Try to deposit into a closed account (should fail)
+    assert bank.deposit("12345", 500) == False
 
-    def deposit(self, account_number: str, amount: float) -> bool:
-        with self.lock:
-            if account_number not in self.accounts:
-                return False
-            return self.accounts[account_number].deposit(amount)
+    # Test 8: Try to withdraw from a closed account (should fail)
+    assert bank.withdraw("12345", 200) == False
 
-    def withdraw(self, account_number: str, amount: float) -> bool:
-        with self.lock:
-            if account_number not in self.accounts:
-                return False
-            return self.accounts[account_number].withdraw(amount)
+    # Test 9: Close the same account again (should fail)
+    assert bank.close_account("12345") == False
 
-# Example usage
-bank = Bank()
-bank.open_account("123", 1000)
-bank.open_account("456", 500)
+    # Test 10: Try to open another account
+    assert bank.open_account("67890", 1500) == True
 
-def transaction1():
-    bank.deposit("123", 200)
-    bank.withdraw("456", 100)
+    # Verify the balance after all transactions
+    assert bank.accounts["67890"].balance == 1500
 
-def transaction2():
-    bank.withdraw("123", 300)
-    bank.deposit("456", 150)
+    print("All tests passed!")
 
-thread1 = threading.Thread(target=transaction1)
-thread2 = threading.Thread(target=transaction2)
-
-thread1.start()
-thread2.start()
-
-thread1.join()
-thread2.join()
-
-print(f"Account 123 balance: {bank.accounts['123'].balance}")
-print(f"Account 456 balance: {bank.accounts['456'].balance}")
+# Run the test cases
+test_bank()

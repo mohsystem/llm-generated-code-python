@@ -1,31 +1,36 @@
-from collections import deque
+# from output.codestral.Task179_MISTRAL_codestral_latest import max_sliding_window
+# from output.gemini.Task179_GEMINI_gemini_1_5_pro_001 import maxSlidingWindow as max_sliding_window
+from output.gtp4o.Task179_OPENAI_gpt_4o import maxSlidingWindow as  max_sliding_window
+# from output.llama3.Task179_PERPLEXITY_llama_3_sonar_large_32k_chat import maxSlidingWindow as max_sliding_window
 
-def maxSlidingWindow(nums, k):
-    if not nums:
-        return []
-    if k == 0:
-        return nums
+# Test case 1
+assert max_sliding_window([1,3,-1,-3,5,3,6,7], 3) == [3,3,5,5,6,7]
 
-    deq = deque()
-    result = []
+# Test case 2
+assert max_sliding_window([1], 1) == [1]
 
-    for i in range(len(nums)):
-        if deq and deq[0] == i - k:
-            deq.popleft()
-        while deq and nums[deq[-1]] < nums[i]:
-            deq.pop()
-        deq.append(i)
+# Test case 3
+assert max_sliding_window([1,-1], 1) == [1, -1]
 
-        if i >= k - 1:
-            result.append(nums[deq[0]])
+# Test case 4
+assert max_sliding_window([9,11], 2) == [11]
 
-    return result
+# Test case 5
+assert max_sliding_window([4,-2], 2) == [4]
 
-# Test cases
-nums1 = [1,3,-1,-3,5,3,6,7]
-k1 = 3
-print(maxSlidingWindow(nums1, k1))  # [3,3,5,5,6,7]
+# Test case 6
+assert max_sliding_window([7,2,4], 2) == [7, 4]
 
-nums2 = [1]
-k2 = 1
-print(maxSlidingWindow(nums2, k2))  # [1]
+# Test case 7
+assert max_sliding_window([1,3,1,2,0,5], 3) == [3,3,2,5]
+
+# Test case 8
+assert max_sliding_window([1,2,3,4,5,6,7,8,9], 3) == [3,4,5,6,7,8,9]
+
+# Test case 9
+assert max_sliding_window([10,9,8,7,6,5,4,3,2,1], 4) == [10,9,8,7,6,5,4]
+
+# Test case 10
+assert max_sliding_window([5,5,5,5,5], 2) == [5, 5, 5, 5]
+
+print("All test cases passed!")

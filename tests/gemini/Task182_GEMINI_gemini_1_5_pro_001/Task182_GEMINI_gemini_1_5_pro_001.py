@@ -1,22 +1,19 @@
-import re
-def clean_phone_number(phone_number):
-    cleaned_number = re.sub(r'[^0-9]', '', phone_number)
-    if len(cleaned_number) == 11 and cleaned_number[0] == '1':
-        return cleaned_number[1:]
-    return cleaned_number if len(cleaned_number) == 10 else None
 
-# Example usage:
-phone_numbers = [
-    "+1 (613)-995-0253",
-    "613-995-0253",
-    "1 613 995 0253",
-    "613.995.0253",
-    "123456789012"  # Invalid phone number
-]
+# from output.claude.Task182_CLAUDE_claude_3_5_sonnet_20240620 import clean_phone_number
+# from output.codestral.Task182_MISTRAL_codestral_latest import clean_phone_number
+from output.gemini.Task182_GEMINI_gemini_1_5_pro_001 import clean_phone_number
+# from output.gtp4o.Task182_OPENAI_gpt_4o import clean_number as clean_phone_number
+# from output.llama3.Task182_PERPLEXITY_llama_3_sonar_large_32k_chat import clean_phone_number
+# Test cases
+assert clean_phone_number('+1 (613)-995-0253') == '6139950253'
+assert clean_phone_number('613-995-0253') == '6139950253'
+assert clean_phone_number('1 613 995 0253') == '6139950253'
+assert clean_phone_number('613.995.0253') == '6139950253'
+assert clean_phone_number('6139950253') == '6139950253'
+assert clean_phone_number('  +1  613  995  0253  ') == '6139950253'  # Extra spaces
+assert clean_phone_number('(613) 995-0253') == '6139950253'  # Parentheses only
+assert clean_phone_number('1-613-995-0253') == '6139950253'  # Hyphens only
+assert clean_phone_number('1 613.995 0253') == '6139950253'  # Mixed separators
+assert clean_phone_number('613 995 0253') == '6139950253'  # Spaces only
 
-for number in phone_numbers:
-    cleaned_number = clean_phone_number(number)
-    if cleaned_number:
-        print(f"Original: {number} -> Cleaned: {cleaned_number}")
-    else:
-        print(f"Invalid phone number: {number}")
+print("All tests passed!")

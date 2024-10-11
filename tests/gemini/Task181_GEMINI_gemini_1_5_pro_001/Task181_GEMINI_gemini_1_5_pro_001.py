@@ -1,45 +1,65 @@
-import threading
+from output.gemini.Task181_GEMINI_gemini_1_5_pro_001 import BankAccount
 
-class BankAccount:
-    def __init__(self, initial_balance=0):
-        self.balance = initial_balance
-        self.lock = threading.Lock()
-        self.is_open = True
+def test_bank_account():
+    # Test 1: Create a new account with an initial balance
+    account = BankAccount(1000)
+    assert account.get_balance() == 1000  # Initial balance should be correct
 
-    def open(self):
-        with self.lock:
-            if not self.is_open:
-                self.is_open = True
-            else:
-                raise ValueError("Account is already open.")
+    # Test 2: Deposit money into the account
+    account.deposit(500)
+    assert account.get_balance() == 1500  # Balance should be updated correctly
 
-    def close(self):
-        with self.lock:
-            if self.is_open:
-                self.is_open = False
-            else:
-                raise ValueError("Account is already closed.")
+    # Test 3: Withdraw money from the account
+    account.withdraw(200)
+    assert account.get_balance() == 1300  # Balance should reflect the withdrawal
 
-    def deposit(self, amount):
-        with self.lock:
-            if not self.is_open:
-                raise ValueError("Cannot deposit to a closed account.")
-            if amount <= 0:
-                raise ValueError("Deposit amount must be positive.")
-            self.balance += amount
+    # Test 4: Withdraw more money than available (should raise an error)
+    try:
+        account.withdraw(2000)
+        assert False  # Should not reach this line
+    except ValueError as e:
+        assert str(e) == "Insufficient funds."
 
-    def withdraw(self, amount):
-        with self.lock:
-            if not self.is_open:
-                raise ValueError("Cannot withdraw from a closed account.")
-            if amount <= 0:
-                raise ValueError("Withdrawal amount must be positive.")
-            if self.balance < amount:
-                raise ValueError("Insufficient funds.")
-            self.balance -= amount
+    # Test 5: Deposit a negative amount (should raise an error)
+    try:
+        account.deposit(-100)
+        assert False  # Should not reach this line
+    except ValueError as e:
+        assert str(e) == "Deposit amount must be positive."
 
-    def get_balance(self):
-        with self.lock:
-            if not self.is_open:
-                raise ValueError("Cannot get balance of a closed account.")
-            return self.balance
+    # Test 6: Close the account
+    account.close()
+    assert account.is_open == False  # Account should be marked as closed
+
+    # Test 7: Try to deposit into a closed account (should raise an error)
+    try:
+        account.deposit(500)
+        assert False  # Should not reach this line
+    except ValueError as e:
+        assert str(e) == "Cannot deposit to a closed account."
+
+    # Test 8: Try to withdraw from a closed account (should raise an error)
+    try:
+        account.withdraw(100)
+        assert False  # Should not reach this line
+    except ValueError as e:
+        assert str(e) == "Cannot withdraw from a closed account."
+
+    # Test 9: Close the account again (should raise an error)
+    try:
+        account.close()
+        assert False  # Should not reach this line
+    except ValueError as e:
+        assert str(e) == "Account is already closed."
+
+    # Test 10: Open the account again (should raise an error)
+    try:
+        account.open()
+        assert False  # Should not reach this line
+    except ValueError as e:
+        assert str(e) == "Account is already open."
+
+    print("All tests passed!")
+
+# Run the test cases
+test_bank_account()

@@ -1,3 +1,6 @@
+from collections import deque
+
+
 def shortest_subarray(nums, k):
     n = len(nums)
     prefix_sum = [0] * (n + 1)
