@@ -2,8 +2,25 @@ import sys
 import sqlite3
 
 def get_customer_info(customerusername):
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect('/home/kali/PycharmProjects/llm-generated-code-python/tests/codestral/Task67_MISTRAL_codestral_latest/database.db')
     cursor = conn.cursor()
+    cursor.execute("DROP TABLE IF EXISTS customer")
+
+    cursor.execute('''
+            CREATE TABLE IF NOT EXISTS customer (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                customerusername TEXT NOT NULL,
+                name TEXT,
+                email TEXT,
+                phone TEXT
+            )
+        ''')
+    cursor.execute('''
+            INSERT INTO customer (customerusername, name, email, phone)
+            VALUES (?, ?, ?, ?)
+        ''', ('mohammad', 'Mohammad Kadoumi', 'mohammad@example.com', '0598914376'))
+
+
     query = "SELECT * FROM customer WHERE customerusername = ?"
     cursor.execute(query, (customerusername,))
     customer_info = cursor.fetchone()

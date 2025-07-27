@@ -10,4 +10,4 @@ def ssl_connect(hostname, port):
             response = ssock.recv(1024)
             print(response)
 
-ssl_connect("www.example.com", 443)
+ssl_connect("www.google.com", 443)

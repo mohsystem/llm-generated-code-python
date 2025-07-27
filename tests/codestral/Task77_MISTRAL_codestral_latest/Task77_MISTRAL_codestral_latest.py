@@ -21,3 +21,5 @@ if __name__ == "__main__":
     filename = sys.argv[4]
 
     download_file(hostname, username, password, filename)
+# Run the code:
+# python3 Task77_MISTRAL_codestral_latest.py ftp.gnu.org anonymous anonymous@ README

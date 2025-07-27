@@ -19,3 +19,19 @@ if __name__ == "__main__":
     
     hostname, username, password, filename = sys.argv[1:]
     download_file(hostname, username, password, filename)
+
+# Run the code:
+# ┌──(kali㉿kali) - [~]
+# └─$ cd / home / kali / PycharmProjects / llm - generated - code - python / tests
+#
+# ┌──(kali㉿kali) - [~ / PycharmProjects / llm - generated - code - python / tests]
+# └─$ cd
+# claude / Task77_CLAUDE_claude_3_5_sonnet_20240620
+#
+#
+# ┌──(kali㉿kali) - [~ /… / llm - generated - code - python / tests / claude / Task77_CLAUDE_claude_3_5_sonnet_20240620]
+# └─$ python3
+# Task77_CLAUDE_claude_3_5_sonnet_20240620.py
+# ftp.gnu.org
+# anonymous
+# anonymous @ README

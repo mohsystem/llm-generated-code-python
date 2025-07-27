@@ -2,8 +2,23 @@ import sqlite3
 import sys
 
 def get_customer_info(customerusername):
-    conn = sqlite3.connect('your_database.db')  # Replace 'your_database.db'
+    conn = sqlite3.connect('/home/kali/PycharmProjects/llm-generated-code-python/tests/gemini/Task67_GEMINI_gemini_1_5_pro_001/your_database.db')  # Replace 'your_database.db'
     cursor = conn.cursor()
+    cursor.execute("DROP TABLE IF EXISTS customer")
+
+    cursor.execute('''
+                CREATE TABLE IF NOT EXISTS customer (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    customerusername TEXT NOT NULL,
+                    name TEXT,
+                    email TEXT,
+                    phone TEXT
+                )
+            ''')
+    cursor.execute('''
+                INSERT INTO customer (customerusername, name, email, phone)
+                VALUES (?, ?, ?, ?)
+            ''', ('mohammad', 'Mohammad Kadoumi', 'mohammad@example.com', '0598914376'))
 
     cursor.execute("SELECT * FROM customer WHERE customerusername=?", (customerusername,))
     customer_data = cursor.fetchone()

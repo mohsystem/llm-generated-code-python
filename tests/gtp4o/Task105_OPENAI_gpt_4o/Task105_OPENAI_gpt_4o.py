@@ -7,4 +7,4 @@ def connect(host, port):
         with context.wrap_socket(sock, server_hostname=host) as ssock:
             print(ssock.version())
 
-connect('example.com', 443)
+connect('www.google.com', 443)

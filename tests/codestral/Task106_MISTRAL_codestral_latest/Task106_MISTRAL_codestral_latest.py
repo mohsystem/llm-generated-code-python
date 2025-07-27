@@ -18,7 +18,9 @@ data = "Hello, World!"
 encrypted_data = cipher.encrypt(data.encode())
 
 # Decrypt the data
-decrypted_data = key.decrypt(encrypted_data)
+# Create a cipher object for decryption using the private key
+decrypt_cipher = PKCS1_OAEP.new(key)
+decrypted_data = decrypt_cipher.decrypt(encrypted_data)
 
 print("Encrypted data:", binascii.hexlify(encrypted_data))
 print("Decrypted data:", decrypted_data.decode())

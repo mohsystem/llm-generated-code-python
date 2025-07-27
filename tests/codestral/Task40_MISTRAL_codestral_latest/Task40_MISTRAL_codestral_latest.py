@@ -23,3 +23,5 @@ def update():
             <input type="submit" value="Update">
         </form>
     '''.format(form.setting(), form.csrf_token)
+if __name__ == '__main__':
+    app.run(debug=True)

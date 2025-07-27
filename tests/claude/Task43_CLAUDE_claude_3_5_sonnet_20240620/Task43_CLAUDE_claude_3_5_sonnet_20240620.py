@@ -47,3 +47,49 @@ def protected():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+# To register a new User:
+#
+# ┌──(kali㉿kali)-[~/PycharmProjects]
+# └─$ curl -X POST http://127.0.0.1:5000/register \
+#      -H "Content-Type: application/json" \
+#      -d '{"username": "testuser", "password": "testpass"}'
+#
+# {
+#   "message": "User registered successfully"
+# }
+#
+#
+# to Login:
+# ┌──(kali㉿kali) - [~ / PycharmProjects]
+# └─$ curl - c
+# cookies.txt - X
+# POST
+# http: // 127.0
+# .0
+# .1: 5000 / login \
+#     - H
+# "Content-Type: application/json" \
+# - d
+# '{"username": "testuser", "password": "testpass"}'
+#
+# {
+#     "message": "Logged in successfully"
+# }
+
+# Access Cokies:
+# ──(kali㉿kali)-[~/PycharmProjects]
+# └─$ curl -b cookies.txt http://127.0.0.1:5000/protected
+
+# logout:
+# ┌──(kali㉿kali)-[~/PycharmProjects]
+# └─$ curl -b cookies.txt -X POST http://127.0.0.1:5000/logout
+#
+# {
+#   "message": "Logged out successfully"
+# }
+
+
+
+
