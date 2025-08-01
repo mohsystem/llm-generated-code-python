@@ -1,4 +1,3 @@
-
 import hashlib
 import ssl
 import socket
@@ -13,16 +12,22 @@ def get_certificate_hash(hostname, port=443):
 def check_certificate_hash(hostname, known_hash):
     try:
         cert_hash = get_certificate_hash(hostname)
+        print(f"\n🔍 Checking certificate for: {hostname}")
         if cert_hash == known_hash:
-            print(f"Certificate hash for {hostname} matches the known hash.")
+            print("✅ Certificate hash MATCHES the known hash.")
         else:
-            print(f"Certificate hash for {hostname} does not match the known hash.")
+            print("❌ Certificate hash DOES NOT match.")
             print(f"Calculated hash: {cert_hash}")
             print(f"Known hash:     {known_hash}")
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"❌ Error checking certificate: {e}")
 
 if __name__ == "__main__":
+    # ✏️ يمكنك تغيير hostname حسب ما تريد التحقق منه
     hostname = "www.example.com"
-    known_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"  # Example hash
+
+    # ✅ بصمة الشهادة الحقيقية لهذا النطاق (يمكنك استخراجها مرة واحدة ثم حفظها هنا)
+    # لا تستخدم القيمة الافتراضية "e3b0..." فهي خاصة بالملف الفارغ.
+    known_hash = "455943cf819425761d1f950263ebf54755d8d684c25535943976f488bc79d23b"
+
     check_certificate_hash(hostname, known_hash)

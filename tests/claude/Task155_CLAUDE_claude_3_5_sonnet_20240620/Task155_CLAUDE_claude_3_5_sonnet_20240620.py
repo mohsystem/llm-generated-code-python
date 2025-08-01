@@ -1,4 +1,3 @@
-
 def heapify(arr, n, i):
     largest = i
     l = 2 * i + 1
@@ -19,6 +18,8 @@ def heapSort(arr):
         arr[i], arr[0] = arr[0], arr[i]
         heapify(arr, i, 0)
 
-arr = list(map(int, input().split()))
+# ✅ بيانات جاهزة للتجربة (أوتوماتيكيًا)
+arr = [12, 11, 13, 5, 6, 7]
+print("Original array:", arr)
 heapSort(arr)
-print(*arr)
+print("Sorted array:", arr)

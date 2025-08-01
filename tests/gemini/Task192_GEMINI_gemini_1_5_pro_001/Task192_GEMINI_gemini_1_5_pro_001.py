@@ -1,4 +1,7 @@
+from typing import List
+
 class Solution:
+
     def xorGame(self, nums: List[int]) -> bool:
         xor = 0
         for num in nums:

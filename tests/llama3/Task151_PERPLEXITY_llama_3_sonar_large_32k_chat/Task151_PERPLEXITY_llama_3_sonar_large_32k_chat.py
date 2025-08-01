@@ -16,7 +16,7 @@ def insert(root, key):
 
 def minValueNode(node):
     current = node
-    while(current.left is not None):
+    while current.left is not None:
         current = current.left
     return current
 
@@ -25,17 +25,13 @@ def deleteNode(root, key):
         return root
     if key < root.val:
         root.left = deleteNode(root.left, key)
-    elif(key > root.val):
+    elif key > root.val:
         root.right = deleteNode(root.right, key)
     else:
         if root.left is None:
-            temp = root.right
-            root = None
-            return temp
+            return root.right
         elif root.right is None:
-            temp = root.left
-            root = None
-            return temp
+            return root.left
         temp = minValueNode(root.right)
         root.val = temp.val
         root.right = deleteNode(root.right, temp.val)
@@ -48,7 +44,13 @@ def searchNode(root, key):
         return searchNode(root.right, key)
     return searchNode(root.left, key)
 
-# Test the code
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.val, end=" ")
+        inorder(root.right)
+
+# ✅ Test the code
 root = None
 root = insert(root, 50)
 root = insert(root, 30)
@@ -60,21 +62,14 @@ root = insert(root, 80)
 
 print("Inorder traversal of the given tree")
 inorder(root)
+print()
 
 print("Delete 20")
 root = deleteNode(root, 20)
 print("Inorder traversal of the modified tree")
 inorder(root)
+print()
 
 print("Search for 40")
 res = searchNode(root, 40)
-if res:
-    print("Found")
-else:
-    print("Not Found")
-
-def inorder(root):
-    if root:
-        inorder(root.left)
-        print(root.val, end=" ")
-        inorder(root.right)
+print("Found" if res else "Not Found")

@@ -16,6 +16,9 @@ try:
     # Load C++ library
     cpp_lib = cdll.LoadLibrary('./cpp_product.so')
 
+
+
+
     class Product:
         def __init__(self):
             # Initialize Java and C++ objects

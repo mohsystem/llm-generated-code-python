@@ -1,4 +1,3 @@
-
 import ctypes
 
 # Allocate memory buffer
@@ -6,21 +5,12 @@ buffer_size = 10
 buffer = (ctypes.c_char * buffer_size)()
 print(buffer)
 
-# Initialize buffer with some data
+# Initialize buffer with ASCII characters A-J
 for i in range(buffer_size):
-    buffer[i] = chr(65 + (i % 26))
-    print(buffer[i])
+    buffer[i] = bytes([65 + (i % 26)])
+    print(buffer[i].decode('utf-8'))
 
-while True:
-    try:
-        index = int(input("Enter an index to read (0-99), or -1 to exit: "))
-        if index == -1:
-            break
-        if 0 <= index < buffer_size:
-            print(f"Data at index {index}: {buffer[index].decode('utf-8')}")
-        else:
-            print("Invalid index. Please enter a number between 0 and 99.")
-    except ValueError:
-        print("Invalid input. Please enter a valid integer.")
-
-# Memory is automatically freed in Python
+# Automatically read all values from buffer (simulate user input)
+print("\nReading all buffer contents automatically:")
+for index in range(buffer_size):
+    print(f"Data at index {index}: {buffer[index].decode('utf-8')}")

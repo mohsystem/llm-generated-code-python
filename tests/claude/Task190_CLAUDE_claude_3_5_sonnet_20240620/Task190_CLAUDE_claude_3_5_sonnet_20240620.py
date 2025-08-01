@@ -1,6 +1,12 @@
+# Create a sample file automatically
+sample_content = """1 2 3
+4 5 6
+7 8 9"""
 
-import sys
+with open('file.txt', 'w') as f:
+    f.write(sample_content)
 
+# Read and transpose
 with open('file.txt', 'r') as file:
     lines = file.readlines()
 

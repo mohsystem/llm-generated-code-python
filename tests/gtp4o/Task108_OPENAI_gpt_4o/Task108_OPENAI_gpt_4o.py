@@ -1,5 +1,7 @@
-# Python Remote Object Manipulation Server (example)
 from xmlrpc.server import SimpleXMLRPCServer
+import xmlrpc.client
+import threading
+import time
 
 class RemoteObject:
     def __init__(self):
@@ -12,11 +14,21 @@ class RemoteObject:
     def get_value(self):
         return self.value
 
-server = SimpleXMLRPCServer(("localhost", 8000))
-obj = RemoteObject()
+def start_server():
+    server = SimpleXMLRPCServer(("localhost", 8000), logRequests=False, allow_none=True)
+    obj = RemoteObject()
+    server.register_function(obj.set_value, "set_value")
+    server.register_function(obj.get_value, "get_value")
+    print("Server is running...")
+    server.serve_forever()
 
-server.register_function(obj.set_value, "set_value")
-server.register_function(obj.get_value, "get_value")
+# Start server in background thread
+threading.Thread(target=start_server, daemon=True).start()
 
-print("Server is running...")
-server.serve_forever()
+# Wait briefly to ensure server starts
+time.sleep(1)
+
+# Client actions (automatic)
+proxy = xmlrpc.client.ServerProxy("http://localhost:8000/", allow_none=True)
+print(proxy.set_value(42))
+print("Retrieved value from server:", proxy.get_value())

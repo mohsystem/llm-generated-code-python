@@ -2,40 +2,44 @@ from threading import Semaphore, Barrier, Thread
 
 class H2O:
     def __init__(self):
-        self.hydrogen_semaphore = Semaphore(2)
-        self.oxygen_semaphore = Semaphore(0)
+        self.h_semaphore = Semaphore(2)
+        self.o_semaphore = Semaphore(1)
         self.barrier = Barrier(3)
 
     def hydrogen(self, releaseHydrogen):
-        self.hydrogen_semaphore.acquire()
+        self.h_semaphore.acquire()
         self.barrier.wait()
         releaseHydrogen()
-        self.hydrogen_semaphore.release()
-        self.oxygen_semaphore.release()
-       
+        self.h_semaphore.release()
+
     def oxygen(self, releaseOxygen):
-        self.oxygen_semaphore.acquire()
+        self.o_semaphore.acquire()
         self.barrier.wait()
         releaseOxygen()
+        self.o_semaphore.release()
 
-# Simulation
 def releaseHydrogen():
     print("H", end='')
 
 def releaseOxygen():
     print("O", end='')
 
-water = "HOH"
-h2o = H2O()
-threads = []
+def run():
+    h2o = H2O()
+    water = "HHO" * 5  # 5 جزيئات ماء: 10 H و 5 O
+    threads = []
 
-for molecule in water:
-    if molecule == 'H':
-        threads.append(Thread(target=h2o.hydrogen, args=(releaseHydrogen,)))
-    else:
-        threads.append(Thread(target=h2o.oxygen, args=(releaseOxygen,)))
+    for atom in water:
+        if atom == 'H':
+            threads.append(Thread(target=h2o.hydrogen, args=(releaseHydrogen,)))
+        else:
+            threads.append(Thread(target=h2o.oxygen, args=(releaseOxygen,)))
 
-for t in threads:
-    t.start()
-for t in threads:
-    t.join()
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    print()
+
+if __name__ == "__main__":
+    run()

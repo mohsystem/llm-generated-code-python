@@ -4,6 +4,7 @@
 # """
 # class Master:
 #     def guess(self, word: str) -> int:
+from typing import List
 
 class Solution:
     def findSecretWord(self, words: List[str], master: 'Master') -> None:

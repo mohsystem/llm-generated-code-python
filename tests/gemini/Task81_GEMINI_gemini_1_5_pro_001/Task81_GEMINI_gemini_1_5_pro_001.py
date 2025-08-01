@@ -1,15 +1,11 @@
 import hashlib
+import os
+
 
 def calculate_certificate_hash(certificate_path, hash_algorithm):
-    """Calculates the hash of an SSL certificate.
+    if not os.path.exists(certificate_path):
+        raise FileNotFoundError(f"❌ File not found: {certificate_path}")
 
-    Args:
-      certificate_path: Path to the SSL certificate file.
-      hash_algorithm: The hash algorithm to use (e.g., 'sha256').
-
-    Returns:
-      The calculated hash as a hexadecimal string.
-    """
     hasher = hashlib.new(hash_algorithm)
     with open(certificate_path, 'rb') as f:
         while True:
@@ -19,26 +15,23 @@ def calculate_certificate_hash(certificate_path, hash_algorithm):
             hasher.update(chunk)
     return hasher.hexdigest()
 
+
 def verify_certificate_hash(certificate_path, expected_hash, hash_algorithm):
-    """Verifies if the hash of an SSL certificate matches a known hash.
-
-    Args:
-      certificate_path: Path to the SSL certificate file.
-      expected_hash: The expected hash value.
-      hash_algorithm: The hash algorithm used to create the expected hash.
-
-    Returns:
-      True if the hashes match, False otherwise.
-    """
     calculated_hash = calculate_certificate_hash(certificate_path, hash_algorithm)
+    print(f"\n📄 Certificate path: {certificate_path}")
+    print(f"🔐 Hash algorithm:   {hash_algorithm}")
+    print(f"🔢 Calculated hash:  {calculated_hash}")
+    print(f"📌 Expected hash:    {expected_hash}")
     return calculated_hash == expected_hash
 
+
 if __name__ == "__main__":
-    cert_file = input("Enter the path to the SSL certificate: ")
-    expected_hash_value = input("Enter the expected hash value: ")
-    hash_algo = input("Enter the hash algorithm used (e.g., sha256): ")
+    # ✅ استبدل هذا بالمسار الصحيح
+    cert_file = "/home/kali/PycharmProjects/llm-generated-code/tests/gemini/Task81_GEMINI_gemini_1_5_pro_001/mycert.pem"
+    expected_hash_value = "your_real_hash_here"
+    hash_algo = "sha256"
 
     if verify_certificate_hash(cert_file, expected_hash_value, hash_algo):
-        print("Certificate hash matches!")
+        print("✅ Certificate hash MATCHES.")
     else:
-        print("Certificate hash does not match.")
+        print("❌ Certificate hash DOES NOT match.")

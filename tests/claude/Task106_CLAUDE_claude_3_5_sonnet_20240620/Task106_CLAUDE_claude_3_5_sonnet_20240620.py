@@ -1,4 +1,3 @@
-
 import random
 import math
 
@@ -25,10 +24,10 @@ def mod_inverse(a, m):
 def generate_keypair(p, q):
     n = p * q
     phi = (p - 1) * (q - 1)
-    e = random.randrange(1, phi)
+    e = random.randrange(2, phi)
     g = math.gcd(e, phi)
     while g != 1:
-        e = random.randrange(1, phi)
+        e = random.randrange(2, phi)
         g = math.gcd(e, phi)
     d = mod_inverse(e, phi)
     return ((e, n), (d, n))
@@ -44,13 +43,23 @@ def decrypt(pk, ciphertext):
     return ''.join(plain)
 
 if __name__ == '__main__':
+    # Generate two primes
     p = generate_prime(1000, 5000)
     q = generate_prime(1000, 5000)
+    print(f"Generated primes:\np = {p}, q = {q}")
+
+    # Generate public and private keys
     public, private = generate_keypair(p, q)
-    
-    message = input("Enter a message to encrypt: ")
+    print(f"\nPublic key: {public}\nPrivate key: {private}")
+
+    # Define a message to encrypt
+    message = "Hello RSA!"
+    print(f"\nOriginal message: {message}")
+
+    # Encrypt the message
     encrypted_msg = encrypt(public, message)
-    print("Encrypted message:", encrypted_msg)
-    
+    print(f"\nEncrypted message: {encrypted_msg}")
+
+    # Decrypt the message
     decrypted_msg = decrypt(private, encrypted_msg)
-    print("Decrypted message:", decrypted_msg)
+    print(f"\nDecrypted message: {decrypted_msg}")

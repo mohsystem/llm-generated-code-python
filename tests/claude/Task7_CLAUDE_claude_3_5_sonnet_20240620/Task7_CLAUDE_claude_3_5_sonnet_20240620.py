@@ -1,10 +1,11 @@
-
 import socket
 import threading
 import json
 import os
+import time
+import unittest
 
-# Server
+# === Server class ===
 class Server:
     def __init__(self, host='localhost', port=5000):
         self.host = host
@@ -15,10 +16,10 @@ class Server:
 
     def start(self):
         self.server_socket.listen()
-        print(f"Server listening on {self.host}:{self.port}")
         while True:
             client_socket, address = self.server_socket.accept()
             client_thread = threading.Thread(target=self.handle_client, args=(client_socket,))
+            client_thread.daemon = True
             client_thread.start()
 
     def handle_client(self, client_socket):
@@ -36,7 +37,6 @@ class Server:
         client_socket.close()
 
     def authenticate(self, username, password):
-        # Simple file-based authentication
         if os.path.exists('users.txt'):
             with open('users.txt', 'r') as file:
                 for line in file:
@@ -45,7 +45,7 @@ class Server:
                         return {'status': 'success', 'message': 'Login successful'}
         return {'status': 'failure', 'message': 'Invalid credentials'}
 
-# Client
+# === Client class ===
 class Client:
     def __init__(self, host='localhost', port=5000):
         self.host = host
@@ -55,9 +55,7 @@ class Client:
     def connect(self):
         self.client_socket.connect((self.host, self.port))
 
-    def login(self):
-        username = input("Enter username: ")
-        password = input("Enter password: ")
+    def login(self, username, password):
         request = {
             'action': 'login',
             'username': username,
@@ -65,19 +63,42 @@ class Client:
         }
         self.client_socket.send(json.dumps(request).encode('utf-8'))
         response = json.loads(self.client_socket.recv(1024).decode('utf-8'))
-        print(response['message'])
+        self.client_socket.close()
+        return response
 
-    def start(self):
-        self.connect()
-        self.login()
+# === Unit test ===
+class TestClientServer(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        # Create test user file
+        with open("users.txt", "w") as f:
+            f.write("admin:1234\n")
+
+        # Start the server in a background thread
+        cls.server = Server()
+        cls.server_thread = threading.Thread(target=cls.server.start)
+        cls.server_thread.daemon = True
+        cls.server_thread.start()
+        time.sleep(1)  # Wait for server to be ready
+
+    def test_successful_login(self):
+        client = Client()
+        client.connect()
+        response = client.login("admin", "1234")
+        self.assertEqual(response['status'], 'success')
+        self.assertEqual(response['message'], 'Login successful')
+
+    def test_failed_login(self):
+        client = Client()
+        client.connect()
+        response = client.login("admin", "wrongpass")
+        self.assertEqual(response['status'], 'failure')
+        self.assertEqual(response['message'], 'Invalid credentials')
+
+    @classmethod
+    def tearDownClass(cls):
+        if os.path.exists("users.txt"):
+            os.remove("users.txt")
 
 if __name__ == "__main__":
-    choice = input("Enter 's' for server, 'c' for client: ")
-    if choice.lower() == 's':
-        server = Server()
-        server.start()
-    elif choice.lower() == 'c':
-        client = Client()
-        client.start()
-    else:
-        print("Invalid choice")
+    unittest.main()

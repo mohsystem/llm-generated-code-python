@@ -1,4 +1,4 @@
-
+from typing import List
 class Solution:
     def xorGame(self, nums: List[int]) -> bool:
         xor_sum = 0

@@ -23,8 +23,9 @@ def create_stack():
 
 def push(stack, vertex):
     new_node = create_node(vertex)
-    new_node.next = stack.top
-    stack.top = new_node
+    new_node_ptr = pointer(new_node)
+    new_node_ptr.contents.next = stack.top
+    stack.top = new_node_ptr
     stack.size += 1
 
 def pop(stack):
@@ -46,14 +47,15 @@ def dfs(graph, start):
             visited[vertex] = True
         node = graph[vertex]
         while node:
-            if not visited[node.vertex]:
-                push(stack, node.vertex)
-            node = node.next
+            if not visited[node.contents.vertex]:
+                push(stack, node.contents.vertex)
+            node = node.contents.next
 
 def add_edge(graph, src, dest):
     new_node = create_node(dest)
-    new_node.next = graph[src]
-    graph[src] = new_node
+    new_node_ptr = pointer(new_node)
+    new_node_ptr.contents.next = graph[src]
+    graph[src] = new_node_ptr
 
 def main(argc, argv):
     V = 5
