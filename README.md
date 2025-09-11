@@ -18,10 +18,8 @@ Run the compiler script:
 
 ```bash
 python compiler.py
-
-Run sonarqube scan
 ```
-
+Run sonarqube scan
 ```bash
 sonar-scanner.bat -D"sonar.organization=mohkharma"
 ```
