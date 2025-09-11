@@ -20,7 +20,7 @@ Run the compiler script:
 python compiler.py
 
 Run sonarqube scan
-
 ```
+```bash
 sonar-scanner.bat -D"sonar.organization=mohkharma"
 ```
